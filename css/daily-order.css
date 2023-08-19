@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgba(253, 181, 181, 0.747);
+  }
+  
+  .daily-order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #000000;
+  }
+  
+  thead th {
+    background-color: #afc5db;
+    color: #000000;
+    padding: 10px 0;
+    text-align: center;
+    border: 1px solid #000000;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+  td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000000;
+  }
+  .confirm-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .confirm-button {
+    background-color: #b5ffb5;
+    color: #000000;
+    font-weight: bold;
+    font-size: 13.3px; /* ปรับขนาดตามความต้องการ */
+  }
+  .confirm-button:hover {
+    background-color: #30ff30;
+  }
+  
+  @media (max-width: 768px) {
+    .login-box {
+      width: 80%;
+    }
+  }
