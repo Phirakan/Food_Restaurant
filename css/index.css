@@ -2,6 +2,9 @@
 
 body {
     font-family: 'Noto Sans Thai', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 /* Navabr */
@@ -25,16 +28,8 @@ body {
     gap: 10px;
   }
 
-.navbar-nav{
-    margin-left: auto;
-    gap: 20px;
-}
-
 .menunavbar{
     gap: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 
@@ -50,7 +45,8 @@ body {
 /* Content Box*/
 .content-box{
     width: 100%;
-    height: 80vh;
+    height: 100%;
+    flex-direction: row;
     padding: 16px;
     /* center */
     display: flex;
@@ -119,11 +115,13 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     position: relative; /* Required for pseudo-element animation */
     overflow: hidden; /* Hide overflowing content */
+    
 }
 
 /* Button Hover Styles */
 .btn-order:hover {
     background-color: #D44442;
+    color: #FFFFFF; /* Slightly darker color on hover */
     box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px); /* Slight vertical lift on hover */
 }
@@ -139,6 +137,10 @@ body {
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
 }
 
 /* Button Hover Styles */
@@ -167,6 +169,9 @@ body {
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Button Hover Styles */
