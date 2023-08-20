@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: 'Noto Sans Thai', sans-serif;
+}
+
+/* Navabr */
+
+.navbarcustom {
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    /* center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+.navbar-brand {
+    /* center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+.navbar-nav{
+    margin-left: auto;
+    gap: 20px;
+}
+
+.menunavbar{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Text */
+.textbrand{
+    font-size: 24px;
+    font-weight: 700;
+    color: #E95A57;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content Box*/
+.content-box{
+    width: 100%;
+    height: 80vh;
+    padding: 16px;
+    /* center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding-left: 0px;
+        padding-right: 0px;
+    
+      }
+
+}
+
+.left-box{
+    width: 50%;
+    height: 100%;
+    padding: 16px;
+    /* center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 50%;
+    
+      }
+}
+
+.right-box{
+    width: 50%;
+    height: 100%;
+    padding: 16px;
+    /* center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 50%;
+        margin-top: 16px;
+    
+      }
+}
+
+
+/* Button */
+
+/* .btn-order is index page and i want it to be interesting and attractive because it's on the home page. */
+.btn-order {
+    background-color: #E95A57;
+    color: #fff;
+    border: none;
+    border-radius: 50px; /* Rounded shape */
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative; /* Required for pseudo-element animation */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+/* Button Hover Styles */
+.btn-order:hover {
+    background-color: #D44442;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px); /* Slight vertical lift on hover */
+}
+
+.btn-store-atnav {
+    background-color: #FFFFFF;
+    color: #E95A57;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Hover Styles */
+.btn-store-atnav:hover {
+    background-color: #F5F5F5;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: #D44442; /* Slightly darker color on hover */
+    transform: translateY(-3px);
+}
+
+/* Button Active State */
+.btn-store-atnav:active {
+    background-color: #EFEFEF; /* Slightly darker than the hover background */
+    box-shadow: none; /* Remove box shadow on click */
+    transform: translateY(0); /* Reset the translateY on click */
+}
+
+.btn-order-atnav{
+    background-color: #E95A57;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Hover Styles */
+.btn-order-atnav:hover {
+    background-color: #D44442;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff; /* Slightly darker color on hover */
+    transform: translateY(-3px);
+}
+
+/* Button Active State */
+.btn-order-atnav:active {
+    background-color: #C33C3A; /* Slightly darker than the hover background */
+    box-shadow: none; /* Remove box shadow on click */
+    transform: translateY(0); /* Reset the translateY on click */
+}
+
+
+/* Img */
+.img-food{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 100%;
+    
+      }
+}
+
