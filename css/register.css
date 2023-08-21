@@ -46,7 +46,7 @@ html {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -59,7 +59,7 @@ html {
     left: 0;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     pointer-events: none;
     transition: .5s;
   }
@@ -90,7 +90,7 @@ html {
   
   .login-box a:hover {
     background: #f49803;
-    color: #fff;
+    color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 0 5px #f4c803,
                 0 0 25px #bd9d0b,
@@ -206,7 +206,7 @@ html {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff00;
     margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -219,7 +219,7 @@ html {
     left: 0;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     pointer-events: none;
     transition: .5s;
   }
