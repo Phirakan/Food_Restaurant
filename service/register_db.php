@@ -64,6 +64,7 @@
                 echo $e->getMessage(); // Added parentheses
             }
         }
+       
     }
 
 ?>

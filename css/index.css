@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Noto Sans Thai', sans-serif;
+    background-color: #FFF0E9;
     display: flex;
     flex-direction: column;
     height: 100vh;
