@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< Updated upstream
-<head>
-  <title>Login Page</title>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="../css/login.css" rel="stylesheet">
-=======
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- favico -->
     <link rel="icon" href="assets/logo.png" type="image/x-icon" />
     <title>อร่อยใกล้เคียง</title>
->>>>>>> Stashed changes
 
     <!-- Bootstrap -->
     <link
