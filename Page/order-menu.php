@@ -57,7 +57,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <?php foreach ($result as $row) { ?>
             <div class="col">
               <div class="card">
-                <img src="<?= $row['img']?>" class="card-img-top" alt="..." />
+                <img src="../upload/<?= $row['img']?>" class="card-img-top" alt="..." />
                 <div class="card-body">
                   <h5 class="card-title"><?= $row['foodname'] ?></h5>
                   <p class="card-text">
