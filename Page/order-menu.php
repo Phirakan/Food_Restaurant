@@ -1,3 +1,14 @@
+<?php 
+
+  require_once('../config/conn_db.php');
+
+  $sql = "SELECT * FROM `food`";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,7 +66,8 @@
       <div class="container-fluid order-menu-box">
         <!-- Menu  code here-->
         <div class="row row-cols-1 row-cols-md-4 g-4">
-          <div class="col">
+          <?php foreach($result as $row){ ?>
+            <div class="col">
             <div class="card">
               <img
                 src="https://img.wongnai.com/p/1920x0/2020/08/23/db92cec979e14c21804c942a13bea2a2.jpg"
@@ -63,11 +75,11 @@
                 alt="..."
               />
               <div class="card-body">
-                <h5 class="card-title">ข้าวผัดกระเพรา</h5>
+                <h5 class="card-title"><?= $row['foodname'] ?></h5>
                 <p class="card-text">
-                  ราคา <span class="text-price">40</span> บาท
+                  ราคา <span class="text-price"><?= $row['price']?></span> บาท
                 </p>
-                <!-- Input Stepper with incress button to left side and value is center and decress button is right side -->
+               
                 <div class="input-group mb-3 input-stepper-layout">
                   <button
                     class="btn btn-decress"
@@ -99,12 +111,14 @@
                   class="btn btn-add"
                   id="btn-add-cart"
                   name="btn-add-cart"
+                  value="<?= $row['ID']?>"
                 >
                   เพิ่มลงตะกร้า
                 </button>
               </div>
             </div>
           </div>
+          <?php } ?>
         </div>
       </div>
     </div>
