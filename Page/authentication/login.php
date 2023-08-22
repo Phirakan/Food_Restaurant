@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+require_once '../../config/conn_db.php'; // Added semicolon
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,7 +33,8 @@
           <h2 class="text-center">สำหรับร้านค้า</h2>
         </div>
         <div class="login-right-box">
-          <form>
+
+          <form action="../../service/login_db.php" method="post">
             <div class="mb-3">
               <!-- <label for="username" class="form-label text-username">ชื่อผู้ใช้งาน</label> -->
               <input
@@ -47,7 +54,7 @@
               />
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-login">ลงชื่อเข้าใช้</button>
+              <button type="submit" name="login" class="btn btn-login">ลงชื่อเข้าใช้</button>
             </div>
           </form>
         </div>

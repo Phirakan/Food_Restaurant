@@ -1,3 +1,9 @@
+<?php 
+
+session_start(); 
+require_once '../config/conn_db.php'; // Added semicolon    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +45,7 @@
 
     <!-- Content -->
     <div class="container-fluid contain-order-menu">
+        
         <!-- Menu  code here-->
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
@@ -56,6 +63,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col">
                 <div class="card menu-card">
                     <img src="../assets/ผัดกระเพรา.jpg" class="card-img-top" alt="..." />
