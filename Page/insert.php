@@ -17,7 +17,7 @@
         if  (in_array($fileActExt, $allow)){
             if ($img['size'] > 0 && $img['error'] == 0){
                 if (move_uploaded_file($img['tmp_name'], $filePath)){
-                   $sql = $conn->prepare("INSERT INTO food (foodname, price, quantity, img) VALUES (:foodname, :price, :quantity, :img)");
+                   $sql = $conn->prepare("INSERT INTO food (foodname, price, img) VALUES (:foodname, :price, :img)");
                    $sql->bindParam(":foodname", $foodname);
                    $sql->bindParam(":price", $price);
                    $sql->bindParam(":img", $fileNew);
