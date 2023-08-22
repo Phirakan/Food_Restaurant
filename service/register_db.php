@@ -3,7 +3,7 @@
     session_start();
     require_once '../config/conn_db.php'; // Added semicolon at the end
 
-    if (isset($_POST['register'])) {
+    if (isset($_POST['../Page/authentication/register.php/register'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $c_password = $_POST['c_password'];
@@ -54,7 +54,7 @@
                     $stmt->bindParam(":lastname", $lastname);
                     $stmt->bindParam(":phonenumber", $phonenumber);
                     $stmt->execute(); // Fixed typo
-                    $_SESSION['success'] = "Sign up successfully!!! <a href='../Page/authentication/login.php' class'alert-link'>click here</a> to login";
+                    $_SESSION['success'] = "Sign up successfully!!! <a href='../Page/authentication/login.php'>click here</a> to login";
                     header("location:../index.php");
                 } else {
                     $_SESSION['error'] = "Something went wrong."; 
@@ -66,5 +66,5 @@
         }
        
     }
-
+    
 ?>
