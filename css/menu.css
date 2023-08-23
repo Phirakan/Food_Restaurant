@@ -1,130 +1,112 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color:  rgba(253, 181, 181, 0.747);
-  }
- 
-  .restaurant-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    margin-top: 10px;
-    background-color: #ffffffc7;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10%;
-  }
-  
-  .left-section {
-    flex: 1;
-    padding-right: 20px;
-  }
-  
-  .left-section img {
-    max-width: 100%;
-  }
-  
-  .center-section {
-    flex: 2;
-  }
-  
-  .center-section h1 {
-    margin-top: 0;
-  }
-  
-  .detail {
-    margin-bottom: 15px;
-  }
-  
-  .right-section {
-    flex: 1;
-    text-align: right;
-  }
-  
-  .add-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .add-button:hover {
-    background-color: #0056b3;
-  }
-  .food-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .food-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    padding: 10px;
-    background-color: #ff0000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-   
-  }
-  
-  .food-item h2 {
-    margin: 0;
-  }
-  
-  .delete-button,
-  .confirm-button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .delete-button {
-    background-color: #ffffff;
-    color: #000000;
-  }
-  
-  .confirm-button {
-    background-color: #007bff;
-    color: #000000;
-    font-weight: bold;
-    font-size: 13.3px; /* ปรับขนาดตามความต้องการ */
-  }
-  
-  .confirm-button:hover {
-    background-color: #0056b3;
-  }
-  .quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .plus-button,
-  .minus-button {
-    font-size: 16px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 8px;
-  }
-  
-  .p {
-    margin: 0 10px;
-    padding: 10px;
-  }
- 
-  
+.menu-box {
+  width: 100%;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  /* background-color: #FFFFFF; */
+  border-radius: 8px;
+  /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); */
+  justify-content: space-between;
+  /* Responsive Mobile */
   @media (max-width: 768px) {
-    .login-box {
-      width: 80%;
-    }
+    padding: 10px;
+    width: fit-content;
   }
+}
+
+.action-btn-layout{
+  gap: 10px;  
+}
+
+/* Text */
+.text-username {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 10px; */
+}
+
+/* Button */
+.btn-add-menu {
+  background-color: #ffffff;
+  color: #e95a57;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-add-menu:hover {
+  background-color: #e95a57;
+  color: #ffffff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Edit not use same design*/
+.btn-edit {
+  background-color: #FDCC63;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.btn-edit:hover {
+  background-color: #FDCC63;
+  color: black;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-delete{
+  background-color: #E95A57;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.btn-delete:hover {
+  background-color: #D44442;
+  color: #FFFFFF;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Table */
+.table {
+  border-radius: 8px;
+}
+
+.table-header {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  text-align: center;
+}
