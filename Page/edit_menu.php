@@ -30,7 +30,8 @@ if (isset($_POST['update'])) {
         $fileNew = $img2;
     }
 
-    $sql = $conn->prepare("UPDATE food SET foodname = :foodname, price = :price, quantity = :quantity, img = :img WHERE ID = :ID");
+    $sql = $conn->prepare("UPDATE food SET foodname = :foodname, price = :price, img = :img WHERE ID = :ID");
+
     $sql->bindParam(":foodname", $foodname);
     $sql->bindParam(":price", $price);
     $sql->bindParam(":img", $fileNew);

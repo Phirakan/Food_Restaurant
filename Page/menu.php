@@ -38,7 +38,7 @@
         </div>
 
         <div class="modal-body">
-            <form action="../Page/insert.php" method="post" enctype="multipart/form-data">
+            <form action="../service/insert.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="foodname" class="col-form-label"> Name:</label>
                     <input type="text" required class="form-control" name="foodname">
@@ -95,7 +95,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col"></th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Img</th>

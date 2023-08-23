@@ -29,7 +29,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbarcustom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php">
+      <a class="navbar-brand" href="../index.php">
         <img src="../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
         <span class="textbrand">อร่อยใกล้เคียง</span>
       </a>
@@ -68,7 +68,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <button class="btn btn-decress" type="button" id="btn-decress" name="btn-decress">
                       -
                     </button>
-                    <input type="number" class="form-control quantity" placeholder="จำนวน" aria-label="จำนวน" aria-describedby="basic-addon2" value="1" />
+                    <input type="number" class="form-control quantity " placeholder="จำนวน" aria-label="จำนวน" aria-describedby="basic-addon2" value="1" />
                     <button class="btn btn-incress" type="button" id="btn-incress" name="btn-incress">
                       +
                     </button>
