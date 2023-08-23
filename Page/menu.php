@@ -25,8 +25,7 @@ if (isset($_GET['delete'])) {
     <title>รายการอาหาร</title>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <!-- CSS -->
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/menu.css" />
@@ -34,34 +33,34 @@ if (isset($_GET['delete'])) {
 </head>
 
 <body>
- <!-- Navbar -->
- <nav class="navbar navbar-expand-md navbarcustom">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbarcustom">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php">
-            <img src="../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
-            <span class="textbrand">อร่อยใกล้เคียง</span>
-          </a>
-    
-          <!-- Add the hamburger menu button -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <!-- Menu Right side -->
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav menunavbar">
-            <li class="nav-item">
-                <p class="text-username">คุณ John Doe</p>
-              </li>
-              <li class="nav-item">
-                <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>
-              </li>
-              
-            </ul>
-          </div>
+            <a class="navbar-brand" href="index.php">
+                <img src="../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
+                <span class="textbrand">อร่อยใกล้เคียง</span>
+            </a>
+
+            <!-- Add the hamburger menu button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu Right side -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav menunavbar">
+                    <li class="nav-item username-layout">
+                        <p class="text-username">คุณ John Doe</p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
-      </nav>
-    
+    </nav>
+
     <!-- Navbar -->
 
 
@@ -109,8 +108,7 @@ if (isset($_GET['delete'])) {
                     <h1>รายการอาหาร</h1>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
-                    <button type="button" class="btn btn-add-menu" data-bs-toggle="modal"
-                        data-bs-target="#foodmodal"><i class="bi bi-plus-circle-fill"></i>เพิ่มรายการอาหาร</button>
+                    <button type="button" class="btn btn-add-menu" data-bs-toggle="modal" data-bs-target="#foodmodal"><i class="bi bi-plus-circle-fill"></i>เพิ่มรายการอาหาร</button>
                 </div>
             </div>
             <hr>
@@ -150,7 +148,7 @@ if (isset($_GET['delete'])) {
                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                             } else {
                                 foreach ($food as $food) {
-                                    ?>
+                            ?>
                                     <tr>
                                         <th scope="row">
                                             <?php echo $food['ID']; ?>
@@ -162,36 +160,32 @@ if (isset($_GET['delete'])) {
                                             <?php echo $food['price']; ?>
                                         </td>
 
-                                        <td width="250px"><img class="rounded" width="100%"
-                                                src="../upload/<?php echo $food['img']; ?>" alt=""></td>
+                                        <td width="250px"><img class="rounded" width="100%" src="../upload/<?php echo $food['img']; ?>" alt=""></td>
                                         <td class="action-btn-layout column">
-                                            <a href="../Page/edit_menu.php?id=<?php echo $food['ID']; ?>"
-                                                class="btn btn-edit">แก้ไข</a>
-                                            <a onclick="return confirm('Are you sure you want to delete?');"
-                                                href="?delete=<?php echo $food['ID']; ?>" class="btn btn-delete">ลบ</a>
+                                            <a href="../Page/edit_menu.php?id=<?php echo $food['ID']; ?>" class="btn btn-edit">แก้ไข</a>
+                                            <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $food['ID']; ?>" class="btn btn-delete">ลบ</a>
                                         </td>
                                     </tr>
-                                <?php }
+                            <?php }
                             } ?>
                         </tbody>
                     </table>
+                    </div>
                 </div>
-            </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-                crossorigin="anonymous"></script>
-            <script>
-                let imgInput = document.getElementById('imgInput');
-                let previewImg = document.getElementById('previewImg');
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+                <script>
+                    let imgInput = document.getElementById('imgInput');
+                    let previewImg = document.getElementById('previewImg');
 
-                imgInput.onchange = evt => {
-                    const [file] = imgInput.files;
-                    if (file) {
-                        previewImg.src = URL.createObjectURL(file)
+                    imgInput.onchange = evt => {
+                        const [file] = imgInput.files;
+                        if (file) {
+                            previewImg.src = URL.createObjectURL(file)
+                        }
                     }
-                }
-            </script>
+                </script>
 </body>
 
 </html>

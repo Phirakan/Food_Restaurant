@@ -33,6 +33,16 @@ body {
     gap: 10px;
 }
 
+.username-layout{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 
 /* Text */
 .textbrand{
@@ -42,6 +52,17 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* Text */
+.text-username {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 10px; */
+  }
 
 /* Content Box*/
 .content-box{
