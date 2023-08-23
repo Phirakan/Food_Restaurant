@@ -52,7 +52,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <!-- Menu  code here-->
       <div class="row row-cols-1 row-cols-md-4 g-4">
         <?php if (empty($result)) { ?>
-          <p>No data</p>
+          <p class="text-center">No data</p>
         <?php } else { ?>
           <?php foreach ($result as $row) { ?>
             <div class="col">
