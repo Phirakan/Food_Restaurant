@@ -1,16 +1,17 @@
 <?php 
 
     session_start();
-    require_once '../config/conn_db.php'; // Added semicolon at the end
+    require_once '../config/conn_db.php';
 
-    if (isset($_POST['../Page/authentication/register.php/register'])) {
+    if (isset($_POST['register'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $c_password = $_POST['c_password'];
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $phonenumber = $_POST['phonenumber'];
-        
+        $user_id = $_POST['User_ID'];
+
         if (empty($username)) {
             $_SESSION['error'] = 'please enter your username';
             header("location: ../Page/authentication/register.php");
@@ -37,34 +38,39 @@
             header("location: ../Page/authentication/register.php");
         } else {
             try {
-                $check_username = $conn->prepare("SELECT username FROM member WHERE username = :Username"); // Added semicolon
-                $check_username->bindParam(":Username", $username);
-                $check_username->execute();
-                $row = $check_username->fetch(PDO::FETCH_ASSOC);
+
+                $check_email = $conn->prepare("SELECT User_ID FROM member WHERE User_ID = :User_ID");
+                $check_email->bindParam(":username", $username);
+                $check_email->execute();
+                $row = $check_email->fetch(PDO::FETCH_ASSOC);
 
                 if ($row['username'] == $username) {
-                    $_SESSION['warning'] = "This username already exists in the system. <a href='../Page/authentication/login.php'>click here</a> to login";
-                    header("location: ../Page/authentication/login.php");
+                    $_SESSION['warning'] = "มี username นี้อยู่ในระบบแล้ว <a href='../Page/authentication/login.php'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
+                    header("../Page/authentication/login.php");
                 } else if (!isset($_SESSION['error'])) {
                     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                    $stmt = $conn->prepare("INSERT INTO member(username, password, firstname, lastname, phonenumber) VALUES (:username, :password, :firstname, :lastname, :phonenumber)");
-                    $stmt->bindParam(":username", $username);
-                    $stmt->bindParam(":password", $passwordHash);
+                    $stmt = $conn->prepare("INSERT INTO member(firstname, lastname, username, password, phonenumber, User_ID) 
+                                            VALUES(:firstname, :lastname, :username, :password, :phonenumber, :User_ID)");
                     $stmt->bindParam(":firstname", $firstname);
                     $stmt->bindParam(":lastname", $lastname);
+                    $stmt->bindParam(":username", $username);
                     $stmt->bindParam(":phonenumber", $phonenumber);
-                    $stmt->execute(); // Fixed typo
-                    $_SESSION['success'] = "Sign up successfully!!! <a href='../Page/authentication/login.php'>click here</a> to login";
-                    header("location:../index.php");
+                    $stmt->bindParam(":password", $passwordHash);
+                    $stmt->bindParam(":User_ID", $user_id);
+                    
+                    $stmt->execute();
+                    $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว! <a href='../Page/authentication/login.php' class='alert-link'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
+                    header("location: ../Page/authentication/login.php");
                 } else {
-                    $_SESSION['error'] = "Something went wrong."; 
-                    header("location:../index.php");
+                    $_SESSION['error'] = "มีบางอย่างผิดพลาด";
+                    header("location: ../index.php");
                 }
+
             } catch(PDOException $e) {
-                echo $e->getMessage(); // Added parentheses
+                echo $e->getMessage();
             }
         }
-       
     }
-    
+
+
 ?>
