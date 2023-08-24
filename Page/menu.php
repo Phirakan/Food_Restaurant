@@ -38,7 +38,7 @@
         </div>
 
         <div class="modal-body">
-            <form action="../service/insert.php" method="post" enctype="multipart/form-data">
+            <form action="../Page/insert.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="foodname" class="col-form-label"> Name:</label>
                     <input type="text" required class="form-control" name="foodname">
@@ -50,6 +50,11 @@
                 
                 <div class="mb-3">
                     <label for="img" class="col-form-label">Image:</label>
+                    <input type="file" required class="form-control" id="imgInput" name="img">
+                    <img loading="lazy" width="100%" id="previewImg" alt="">
+                </div>
+                <div class="mb-3">
+                    <label for="img" class="col-form-label">quantity:</label>
                     <input type="file" required class="form-control" id="imgInput" name="img">
                     <img loading="lazy" width="100%" id="previewImg" alt="">
                 </div>
@@ -95,11 +100,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col"></th>
+                    <th scope="col">NO.</th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Img</th>
-                    <th scope="col"></th>
+                    <th scope="col">quantity</th>
                 </tr>
             </thead>
             <tbody>
@@ -123,6 +128,7 @@
                             <a href="../Page/edit_menu.php?id=<?php echo $food['ID']; ?>" class="btn btn-warning">Edit</a>
                             <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $food['ID']; ?>" class="btn btn-danger">Delete</a>
                         </td>
+                        <td><?php echo $food['quantity']; ?></td>
                     </tr>
                 <?php }  } ?>
             </tbody>
