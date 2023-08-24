@@ -75,8 +75,9 @@ if (isset($_POST['update'])) {
         <hr>
         <form action="edit_menu.php" method="post" enctype="multipart/form-data">
             <?php
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
+            
+            if (isset($_GET['ID'])) {
+                $id = $_GET['ID'];
                 $sql = "SELECT * FROM food WHERE ID = $id";
                 $stmt = $conn->query($sql);
                 $stmt->execute();
@@ -86,7 +87,7 @@ if (isset($_POST['update'])) {
             ?>
             <div class="mb-3">
                 <label for="ID" class="col-form-label">ID:</label>
-                <input type="text" readonly value="<?php echo $rs['ID']; ?>" required class="form-control" name="ID">
+                <input type="text" readonly value="<?php  echo $rs['ID']; ?>" required class="form-control" name="ID">
                 <label for="foodname" class="col-form-label"> Name:</label>
                 <input type="text" value="<?php echo $rs['foodname']; ?>" required class="form-control" name="foodname">
                 <input type="hidden" value="<?php echo $rs['img']; ?>" required class="form-control" name="img2">

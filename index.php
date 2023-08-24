@@ -46,7 +46,7 @@
                 <a href="/Page/order-menu.php" class="btn btn-order-atnav">สั่งอาหาร</a>
               </li>
               <li class="nav-item">
-                <a href="page/authentication/" class="btn btn-store-atnav">ร้านค้า</a>
+                <a href="Page/edit_menu.php" class="btn btn-store-atnav">ร้านค้า</a>
               </li>
             </ul>
           </div>
