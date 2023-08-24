@@ -8,7 +8,7 @@ if (isset($_POST['update'])) {
     $id = $_POST['ID'];
     $foodname = $_POST['foodname'];
     $price = $_POST['price'];
-   
+    $quantity = $_POST['quantity'];
     $img = $_FILES['img'];
 
     $img2 = $_POST['img2'];
@@ -30,11 +30,11 @@ if (isset($_POST['update'])) {
         $fileNew = $img2;
     }
 
-    $sql = $conn->prepare("UPDATE food SET foodname = :foodname, price = :price, img = :img WHERE ID = :ID");
-
+    $sql = $conn->prepare("UPDATE food SET foodname = :foodname, price = :price, quantity = :quantity, img = :img WHERE ID = :ID");
     $sql->bindParam(":foodname", $foodname);
     $sql->bindParam(":price", $price);
     $sql->bindParam(":img", $fileNew);
+    $sql->bindParam(":quantity", $quantity);
     $sql->bindParam(":ID", $id);
     $sql->execute();
 
@@ -94,6 +94,10 @@ if (isset($_POST['update'])) {
             <div class="mb-3">
                 <label for="price" class="col-form-label">Price:</label>
                 <input type="text" value="<?php echo $rs['price']; ?>" required class="form-control" name="price">
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="col-form-label">quantity:</label>
+                <input type="text" value="<?php echo $rs['quantity']; ?>" required class="form-control" name="quantity">
             </div>
            
             <div class="mb-3">
