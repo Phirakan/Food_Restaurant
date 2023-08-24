@@ -29,7 +29,7 @@
         </div>
         <div class="user-box">
           <input type="password" name="c_password" required="" />
-          <label for="password">confirm Password</label>
+          <label for="c_password">confirm Password</label>
         </div>
         <div class="user-box">
           <input type="text" name="firstname" required="" />
