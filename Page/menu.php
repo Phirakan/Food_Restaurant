@@ -2,6 +2,11 @@
 
 session_start();
 require_once '../config/conn_db.php'; // Added semicolon at the end
+
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
+
+
+
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     $deletestmt = $conn->query("DELETE FROM food WHERE ID = $delete_id");
@@ -36,7 +41,7 @@ if (isset($_GET['delete'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbarcustom">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="../index.php">
                 <img src="../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
                 <span class="textbrand">อร่อยใกล้เคียง</span>
             </a>
@@ -50,10 +55,10 @@ if (isset($_GET['delete'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav menunavbar">
                     <li class="nav-item username-layout">
-                        <p class="text-username">คุณ John Doe</p>
+                    <p class="text-username">คุณ <?php echo htmlspecialchars($username); ?></p>
                     </li>
                     <li class="nav-item">
-                        <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>
+                        <a href="../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
                     </li>
 
                 </ul>
@@ -73,22 +78,22 @@ if (isset($_GET['delete'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body">
-                        <form action="../service/insert.php" method="post" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="foodname" class="col-form-label">ชื่อเมนู:</label>
-                                <input type="text" required class="form-control" name="foodname">
-                            </div>
-                            <div class="mb-3">
-                                <label for="price" class="col-form-label">ราคา:</label>
-                                <input type="text" required class="form-control" name="price">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="img" class="col-form-label">รูปภาพ:</label>
-                                <input type="file" required class="form-control" id="imgInput" name="img">
-                                <img loading="lazy" width="100%" id="previewImg" alt="">
-                            </div>
+        <div class="modal-body">
+            <form action="../service/insert.php" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="foodname" class="col-form-label"> Name:</label>
+                    <input type="text" required class="form-control" name="foodname">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="col-form-label">Price:</label>
+                    <input type="text" required class="form-control" name="price">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="img" class="col-form-label">Image:</label>
+                    <input type="file" required class="form-control" id="imgInput" name="img">
+                    <img loading="lazy" width="100%" id="previewImg" alt="">
+                </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
@@ -172,7 +177,6 @@ if (isset($_GET['delete'])) {
                     </table>
                     </div>
                 </div>
-
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
                 <script>

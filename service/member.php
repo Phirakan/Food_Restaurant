@@ -2,8 +2,14 @@
 
 session_start();
 require_once('../config/conn_db.php');
+if (isset($user)) {  
+    $_SESSION['username'] = $user['username'];
+    header('Location: ../menu.php');  
+    exit;
+}
 
 if (isset($_POST['login'])) {
+
 
     // Vaariable
     $username = $_POST['username'];
@@ -30,10 +36,10 @@ if (isset($_POST['login'])) {
             if ($check_data->rowCount() > 0) {
                 if ($username == $row['username']) {
                     if (password_verify($password, $row['password'])) {
-                        $_SESSION['User_ID'] = $row['User_ID'];
+                       
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['success'] = 'เข้าสู่ระบบสำเร็จ';
-                        header("Location: ../../index.php");
+                        header("Location: ../index.php");
                     } else {
                         $_SESSION['error'] = 'รหัสผ่านผิด';
                         header("Location: ../Page/authentication/login.php");

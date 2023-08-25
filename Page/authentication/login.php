@@ -2,6 +2,11 @@
   session_start();
   require_once '../../config/conn_db.php'; // Added semicolon
 
+  if (isset($user)) {  
+    $_SESSION['username'] = $user['username'];
+    header('Location: ../Page/menu.php');  
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

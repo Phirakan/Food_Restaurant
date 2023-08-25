@@ -1,7 +1,9 @@
 <?php 
   session_start();
-  require_once('config/conn_db.php');
-
+ 
+  if (!isset($_SESSION['username'])) {
+    header('Location: Page/authentication/login.php');  // ถ้ายังไม่ได้ Login, นำไปยังหน้า Login
+    exit;}
 ?>
 
 <!DOCTYPE html>
@@ -42,11 +44,14 @@
           <!-- Menu Right side -->
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav menunavbar">
+            <li class="nav-item username-layout">
+                    <p class="text-username">คุณ <?php echo htmlspecialchars($username); ?></p>
+                    </li>
               <li class="nav-item">
-                <a href="page/order-menu.php" class="btn btn-order-atnav">สั่งอาหาร</a>
+                <a href="/Page/order-menu.php" class="btn btn-order-atnav">สั่งอาหาร</a>
               </li>
               <li class="nav-item">
-                <a href="page/authentication/login.php" class="btn btn-store-atnav">ร้านค้า</a>
+                <a href="../Page/edit_menu.php" class="btn btn-store-atnav">ร้านค้า</a>
               </li>
             </ul>
           </div>
@@ -61,7 +66,7 @@
           <div class="text-left">
             <h1 class="text-header">อร่อยใกล้เคียง </h1>
             <p class="text-description">แพลตฟอร์มสั่งอาหารออนไลน์ ที่จะช่วยให้คุณสามารถสั่งอาหารจากร้านค้าใกล้เคียง และรับประทานอาหารได้ที่บ้าน หรือที่ไหนก็ได้ อย่างง่ายดาย</p>
-            <a href="page/order-menu.php" class="btn btn-order">สั่งอาหาร</a>
+            <a href="Page/order-menu.php" class="btn btn-order">สั่งอาหาร</a>
           </div>
         </div>
         <div class="col-md-6 col-12 right-box">
