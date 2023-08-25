@@ -2,6 +2,11 @@
 
 session_start();
 require_once '../config/conn_db.php'; // Added semicolon at the end
+
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
+
+
+
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     $deletestmt = $conn->query("DELETE FROM food WHERE ID = $delete_id");
@@ -50,10 +55,10 @@ if (isset($_GET['delete'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav menunavbar">
                     <li class="nav-item username-layout">
-                        <p class="text-username">คุณ John Doe</p>
+                    <p class="text-username">คุณ <?php echo htmlspecialchars($username); ?></p>
                     </li>
                     <li class="nav-item">
-                        <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>
+                        <a href="../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
                     </li>
 
                 </ul>

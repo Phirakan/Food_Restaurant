@@ -2,7 +2,8 @@
 
 session_start(); 
 require_once '../config/conn_db.php'; // Added semicolon  
- 
+
+
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,9 @@
 <?php 
   session_start();
  
-
+  if (!isset($_SESSION['username'])) {
+    header('Location: Page/authentication/login.php');  // ถ้ายังไม่ได้ Login, นำไปยังหน้า Login
+    exit;}
 ?>
 
 <!DOCTYPE html>
@@ -42,11 +44,14 @@
           <!-- Menu Right side -->
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav menunavbar">
+            <li class="nav-item username-layout">
+                    <p class="text-username">คุณ <?php echo htmlspecialchars($username); ?></p>
+                    </li>
               <li class="nav-item">
                 <a href="/Page/order-menu.php" class="btn btn-order-atnav">สั่งอาหาร</a>
               </li>
               <li class="nav-item">
-                <a href="Page/edit_menu.php" class="btn btn-store-atnav">ร้านค้า</a>
+                <a href="../Page/edit_menu.php" class="btn btn-store-atnav">ร้านค้า</a>
               </li>
             </ul>
           </div>

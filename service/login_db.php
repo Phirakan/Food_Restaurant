@@ -3,7 +3,11 @@
     session_start();
     require_once '../config/conn_db.php';
 
-
+    if (isset($user)) {  
+        $_SESSION['username'] = $user['username'];
+        header('Location: ../Page/menu.php');  
+        exit;
+    }
     if (isset($_POST['login'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
