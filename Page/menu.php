@@ -132,44 +132,51 @@ if (isset($_GET['delete'])) {
                         ?>
                     <?php } ?>
 
-        <!-- ตาราง -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Img</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                    $stmt = $conn->query("SELECT * FROM food");
-                    $stmt->execute();
-                    $food = $stmt->fetchAll();
+                    <!-- ตาราง -->
+                    <table class="table">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col">ลำดับ</th>
+                                <th scope="col">ชื่อเมนู</th>
+                                <th scope="col">ราคา</th>
+                                <th scope="col">รูปภาพ</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $stmt = $conn->query("SELECT * FROM food");
+                            $stmt->execute();
+                            $food = $stmt->fetchAll();
 
-                    if (!$food) {
-                        echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
-                    } else {
-                    foreach($food as $food)  {  
-                ?>
-                    <tr>
-                        <th scope="row"><?php echo $food['ID']; ?></th>
-                        <td><?php echo $food['foodname']; ?></td>
-                        <td><?php echo $food['price']; ?></td>
-                        
-                        <td width="250px"><img class="rounded" width="100%" src="../upload/<?php echo $food['img']; ?>" alt=""></td>
-                        <td>
-                            <a href="../Page/edit_menu.php?id=<?php echo $food['ID']; ?>" class="btn btn-warning">Edit</a>
-                            <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $food['ID']; ?>" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                <?php }  } ?>
-            </tbody>
-            </table>
-</div>
+                            if (!$food) {
+                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                            } else {
+                                foreach ($food as $food) {
+                            ?>
+                                    <tr>
+                                        <th scope="row">
+                                            <?php echo $food['ID']; ?>
+                                        </th>
+                                        <td>
+                                            <?php echo $food['foodname']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $food['price']; ?>
+                                        </td>
 
+                                        <td width="250px"><img class="rounded" width="100%" src="../upload/<?php echo $food['img']; ?>" alt=""></td>
+                                        <td class="action-btn-layout column">
+                                            <a href="../Page/edit_menu.php?id=<?php echo $food['ID']; ?>" class="btn btn-edit">แก้ไข</a>
+                                            <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $food['ID']; ?>" class="btn btn-delete">ลบ</a>
+                                        </td>
+                                    </tr>
+                            <?php }
+                            } ?>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
                 <script>

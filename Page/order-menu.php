@@ -45,15 +45,23 @@ require_once '../config/conn_db.php'; // Added semicolon
 
     <!-- Navbar -->
 
-    <!-- Content -->
-    <div class="container-fluid contain-order-menu">
-        
-  <!-- ... -->
-<!-- Menu  code here-->
-<div class="row row-cols-1 row-cols-md-3 g-4">
-<?php
-    $stmt = $conn->query("SELECT * FROM food");
-    $foodItems = $stmt->fetchAll();
+  <!-- Content -->
+  <div style="margin-left: 20px; margin-right: 20px">
+    <div class="container-fluid order-menu-box">
+      <!-- Menu  code here-->
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <?php if (empty($result)) { ?>
+          <p class="text-center">No data</p>
+        <?php } else { ?>
+          <?php foreach ($result as $row) { ?>
+            <div class="col">
+              <div class="card">
+                <img src="../upload/<?= $row['img']?>" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title"><?= $row['foodname'] ?></h5>
+                  <p class="card-text">
+                    ราคา <span class="text-price"><?= $row['price'] ?></span> บาท
+                  </p>
 
     foreach ($foodItems as $food) {
     ?>
