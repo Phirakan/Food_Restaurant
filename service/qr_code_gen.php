@@ -44,7 +44,7 @@ header('Content-Type: '.$result->getMimeType());
 echo $result->getString();
 
 // Save it to a file
-$result->saveToFile('../assets/qrcode.png');
+$result->saveToFile('../assets/qrcode/qrcode.png');
 
 
 // Validate the result
