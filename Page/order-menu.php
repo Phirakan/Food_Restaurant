@@ -2,10 +2,17 @@
 
 session_start();
 require_once '../config/conn_db.php'; // Added semicolon  
-$sql = "SELECT * FROM `food`";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// get value from url
+// url : localhost:3000/page/order-menu.php?restaurant=1
+if (isset($_GET['restaurant'])) {
+    $restaurant_id = $_GET['restaurant'];
+    $sql = "SELECT * FROM `food` WHERE `member_id` = $restaurant_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} else {
+    header('Location: ../index.php');
+}
 
 ?>
 
@@ -33,9 +40,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <img src="../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
                 <span class="textbrand">อร่อยใกล้เคียง</span>
             </a>
-
+            
             <!-- Button Cart to Right side -->
+            
 
+                </ul>
             <ul class="navbar-nav menunavbar">
                 <li class="nav-item">
                     <a href="cart.php" class="btn btn-cart" style="gap: 8px"><i class="bi bi-basket-fill"></i>รายการสั่งอาหาร</a>

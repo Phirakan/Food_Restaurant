@@ -7,6 +7,7 @@
         $foodname = $_POST['foodname'];
         $price = $_POST['price'];
         $img = $_FILES['img'];
+        $storeid = $_SESSION['store_id'];
 
         $allow = array('jpg', 'jpeg', 'png');
         $extension = explode(".", $img['name']);
@@ -17,10 +18,11 @@
         if  (in_array($fileActExt, $allow)){
             if ($img['size'] > 0 && $img['error'] == 0){
                 if (move_uploaded_file($img['tmp_name'], $filePath)){
-                   $sql = $conn->prepare("INSERT INTO food (foodname, price, img) VALUES (:foodname, :price, :img)");
+                   $sql = $conn->prepare("INSERT INTO food (foodname, price, img,member_ID) VALUES (:foodname, :price, :img,:storeid)");
                    $sql->bindParam(":foodname", $foodname);
                    $sql->bindParam(":price", $price);
                    $sql->bindParam(":img", $fileNew);
+                   $sql->bindParam(":storeid", $storeid);
                    $sql->execute();
 
                    if ($sql) {
