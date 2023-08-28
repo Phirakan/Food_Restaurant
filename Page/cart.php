@@ -3,6 +3,8 @@
 session_start();
 require_once '../config/conn_db.php'; // Added semicolon at the end
 
+
+
 if (isset($_GET['foodname']) && isset($_GET['price']) && isset($_GET['quantity'])) {
     $foodname = $_GET['foodname'];
     $price = $_GET['price'];

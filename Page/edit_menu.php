@@ -77,7 +77,7 @@ if (isset($_POST['update'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbarcustom">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="../index.php">
                 <img src="../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
                 <span class="textbrand">อร่อยใกล้เคียง</span>
             </a>
@@ -91,7 +91,7 @@ if (isset($_POST['update'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav menunavbar">
                     <li class="nav-item username-layout">
-                        <p class="text-username">คุณ John Doe</p>
+                        <p class="text-username">ร้าน <?php echo htmlspecialchars($username); ?></p>
                     </li>
                     <li class="nav-item">
                         <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>

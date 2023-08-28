@@ -16,15 +16,19 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
 
+
     if (empty($username)) {
         $_SESSION['error'] = 'กรุณากรอกชื่อผู้ใช้งาน';
-        header("Location: ../Page/authentication/login.php");
+        echo "กรุณากรอกชื่อผู้ใช้งาน";
+        // header("Location: ../Page/authentication/login.php");
     } else if (empty($password)) {
         $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
-        header("Location: ../Page/authentication/login.php");
-    } else if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 8) {
+        echo "กรุณากรอกรหัสผ่าน";
+        // header("Location: ../Page/authentication/login.php");
+    } else if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
         $_SESSION['error'] = "กรุณากรอกรหัสผ่าน 8-20 ตัวอักษร";
-        header("Location: ../Page/authentication/login.php");
+        echo "กรุณากรอกรหัสผ่าน 8-20 ตัวอักษร";
+        // header("Location: ../Page/authentication/login.php");
     } else {
         try {
 
@@ -37,11 +41,17 @@ if (isset($_POST['login'])) {
                 if ($username == $row['username']) {
                     if (password_verify($password, $row['password'])) {
                        
+                        $_SESSION['store_id'] = $row['member_ID'];
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['success'] = 'เข้าสู่ระบบสำเร็จ';
+                        // echo "<pre>";
+                        // print_r($_SESSION);
+                        // echo "</pre>";
+                        // echo "===>".$row['username'];
                         header("Location: ../index.php");
                     } else {
                         $_SESSION['error'] = 'รหัสผ่านผิด';
+                        echo "รหัสผ่านผิด";
                         header("Location: ../Page/authentication/login.php");
                     }
                 } else {

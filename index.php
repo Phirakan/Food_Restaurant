@@ -1,6 +1,7 @@
 <?php 
   session_start();
- 
+  require_once('config/conn_db.php');
+
   if (!isset($_SESSION['username'])) {
     header('Location: Page/authentication/login.php');  // ถ้ายังไม่ได้ Login, นำไปยังหน้า Login
     exit;}
@@ -44,15 +45,22 @@
           <!-- Menu Right side -->
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav menunavbar">
-            <li class="nav-item username-layout">
-                    <p class="text-username">คุณ <?php echo htmlspecialchars($username); ?></p>
+            <?php if (isset($_SESSION['username'])) { ?>
+              <li class="nav-item username-layout">
+                <p class="text-username">ร้าน <?php echo $_SESSION['username'] ?></p>
                     </li>
+                <li class="nav-item">
+                  <a href="../Page/menu.php" class="btn btn-order-atnav">ร้านค้า</a>
+                </li>
+                <li class="nav-item">
+                    <a href="service/logout.php" class="btn btn-store-atnav">ออกจากระบบ</a>
+                </li>
+               
+            <?php } else { ?>
               <li class="nav-item">
-                <a href="/Page/order-menu.php" class="btn btn-order-atnav">สั่งอาหาร</a>
+                <a href="Page/authentication/login.php" class="btn btn-order-atnav">เข้าสู่ระบบ</a>
               </li>
-              <li class="nav-item">
-                <a href="../Page/edit_menu.php" class="btn btn-store-atnav">ร้านค้า</a>
-              </li>
+            <?php } ?>
             </ul>
           </div>
         </div>
@@ -66,7 +74,12 @@
           <div class="text-left">
             <h1 class="text-header">อร่อยใกล้เคียง </h1>
             <p class="text-description">แพลตฟอร์มสั่งอาหารออนไลน์ ที่จะช่วยให้คุณสามารถสั่งอาหารจากร้านค้าใกล้เคียง และรับประทานอาหารได้ที่บ้าน หรือที่ไหนก็ได้ อย่างง่ายดาย</p>
-            <a href="Page/order-menu.php" class="btn btn-order">สั่งอาหาร</a>
+           <!-- if else -->
+           <?php if (isset($_SESSION['username'])) { ?>
+            <a href="Page/order-menu.php?restaurant=<?php echo $_SESSION['store_id'] ?>" class="btn btn-order">สั่งอาหาร</a>
+            <?php } else { ?>
+              <a href="#" class="btn btn-order">กรุณาสแกน QRCODE จากร้านอาหาร</a>
+            <?php } ?>
           </div>
         </div>
         <div class="col-md-6 col-12 right-box">
