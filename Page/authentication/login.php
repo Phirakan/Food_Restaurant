@@ -46,6 +46,7 @@
                 type="text"
                 class="form-control"
                 id="username"
+                name="username"
                 placeholder="กรอกชื่อผู้ใช้งาน"
               />
             </div>
@@ -55,6 +56,7 @@
                 type="password"
                 class="form-control"
                 id="password"
+                name="password"
                 placeholder="กรอกรหัสผ่าน"
               />
             </div>

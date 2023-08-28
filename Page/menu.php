@@ -4,12 +4,18 @@ session_start();
 require_once '../config/conn_db.php'; // Added semicolon at the end
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
+if (!isset($_SESSION['username'])) {
+    header("Location: ../index.php");
+}else{
+    $username = $_SESSION['username'];
+    $storeid = $_SESSION['store_id'];
+}
 
 
 
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
-    $deletestmt = $conn->query("DELETE FROM food WHERE ID = $delete_id");
+    $deletestmt = $conn->query("DELETE FROM food WHERE food_ID = $delete_id");
     $deletestmt->execute();
 
     if ($deletestmt) {
@@ -55,7 +61,7 @@ if (isset($_GET['delete'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav menunavbar">
                     <li class="nav-item username-layout">
-                    <p class="text-username">คุณ <?php echo htmlspecialchars($username); ?></p>
+                    <p class="text-username">ร้าน <?php echo htmlspecialchars($username); ?></p>
                     </li>
                     <li class="nav-item">
                         <a href="../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
@@ -110,7 +116,7 @@ if (isset($_GET['delete'])) {
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>รายการอาหาร</h1>
+                    <h1>รายการอาหาร <?php echo $_SESSION['username'] ?></h1>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-add-menu" data-bs-toggle="modal" data-bs-target="#foodmodal"><i class="bi bi-plus-circle-fill"></i>เพิ่มรายการอาหาร</button>
@@ -145,7 +151,8 @@ if (isset($_GET['delete'])) {
                         </thead>
                         <tbody>
                             <?php
-                            $stmt = $conn->query("SELECT * FROM food");
+                            // select data from database with store id(member_id)
+                            $stmt = $conn->prepare("SELECT * FROM food WHERE member_ID = $storeid");
                             $stmt->execute();
                             $food = $stmt->fetchAll();
 
@@ -156,7 +163,7 @@ if (isset($_GET['delete'])) {
                             ?>
                                     <tr>
                                         <th scope="row">
-                                            <?php echo $food['ID']; ?>
+                                            <?php echo $food['food_ID']; ?>
                                         </th>
                                         <td>
                                             <?php echo $food['foodname']; ?>
@@ -167,8 +174,8 @@ if (isset($_GET['delete'])) {
 
                                         <td width="250px"><img class="rounded" width="100%" src="../upload/<?php echo $food['img']; ?>" alt=""></td>
                                         <td class="action-btn-layout column">
-                                            <a href="../Page/edit_menu.php?id=<?php echo $food['ID']; ?>" class="btn btn-edit">แก้ไข</a>
-                                            <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $food['ID']; ?>" class="btn btn-delete">ลบ</a>
+                                            <a href="../Page/edit_menu.php?id=<?php echo $food['food_ID']; ?>" class="btn btn-edit">แก้ไข</a>
+                                            <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $food['food_ID']; ?>" class="btn btn-delete">ลบ</a>
                                         </td>
                                     </tr>
                             <?php }
