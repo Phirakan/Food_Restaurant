@@ -6,6 +6,7 @@ require_once '../config/conn_db.php'; // Added semicolon
 // url : localhost:3000/page/order-menu.php?restaurant=1
 if (isset($_GET['restaurant'])) {
     $restaurant_id = $_GET['restaurant'];
+    $_SESSION['restaurant_id_customer'] = $restaurant_id;
     $sql = "SELECT * FROM `food` WHERE `member_id` = $restaurant_id";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -22,7 +23,8 @@ if (isset($_GET['restaurant'])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>รายละเอียดร้านอาหาร</title>
+    <link rel="icon" href="../assets/logo.png" type="image/x-icon" />
+    <title>เมนูอาหาร</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
@@ -40,14 +42,9 @@ if (isset($_GET['restaurant'])) {
                 <img src="../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
                 <span class="textbrand">อร่อยใกล้เคียง</span>
             </a>
-            
-            <!-- Button Cart to Right side -->
-            
-
-                </ul>
             <ul class="navbar-nav menunavbar">
                 <li class="nav-item">
-                    <a href="cart.php" class="btn btn-cart" style="gap: 8px"><i class="bi bi-basket-fill"></i>รายการสั่งอาหาร</a>
+                    <a href="cart/cart.php" class="btn btn-cart" style="gap: 8px"><i class="bi bi-basket-fill"></i>รายการสั่งอาหาร</a>
                 </li>
             </ul>
         </div>
@@ -114,7 +111,7 @@ if (isset($_GET['restaurant'])) {
         const totalPrice = price * quantity; // Calculate total price
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `cart.php?foodname=${encodeURIComponent(foodName)}&price=${price}&quantity=${quantity}&totalPrice=${totalPrice}`, true);
+        xhr.open('GET', `cart/cart.php?foodname=${encodeURIComponent(foodName)}&price=${price}&quantity=${quantity}&totalPrice=${totalPrice}`, true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

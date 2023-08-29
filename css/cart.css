@@ -14,10 +14,31 @@
   }
 }
 
-.action-btn-layout{
-  gap: 10px;  
+.cart-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Select item */
+.selection-table-dropdown{
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-btn-layout {
+  gap: 10px;
+}
+
+/* Text */
+.text-total-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
 
 /* Button */
 .btn-add-menu {
@@ -45,7 +66,7 @@
 
 /* Button Edit not use same design*/
 .btn-edit {
-  background-color: #FDCC63;
+  background-color: #fdcc63;
   color: black;
   border: none;
   border-radius: 8px;
@@ -62,14 +83,14 @@
 }
 
 .btn-edit:hover {
-  background-color: #FDCC63;
+  background-color: #fdcc63;
   color: black;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.btn-delete{
-  background-color: #E95A57;
-  color: #FFFFFF;
+.btn-delete {
+  background-color: #e95a57;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
@@ -85,14 +106,14 @@
 }
 
 .btn-delete:hover {
-  background-color: #D44442;
-  color: #FFFFFF;
+  background-color: #d44442;
+  color: #ffffff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.btn-qrcode-gen{
-  background-color: #E95A57;
-  color: #FFFFFF;
+.btn-back-to-ordermenu {
+  background-color: #ffffff;
+  color: #e95a57;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
@@ -107,10 +128,33 @@
   width: fit-content;
 }
 
-.btn-qrcode-gen:hover {
-  background-color: #D44442;
-  color: #FFFFFF;
+.btn-back-to-ordermenu:hover {
+  background-color: #e95a57;
+  color: #ffffff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-send-ordermenu{
+    background-color: #e95a57;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+.btn-send-ordermenu:hover{
+    background-color: #d44442;
+    color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Table */

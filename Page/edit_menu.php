@@ -59,6 +59,7 @@ if (isset($_POST['update'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/logo.png" type="image/x-icon" />
     <title>แก้ไขรายการอาหาร</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
@@ -91,7 +92,7 @@ if (isset($_POST['update'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav menunavbar">
                     <li class="nav-item username-layout">
-                        <p class="text-username">ร้าน <?php echo htmlspecialchars($username); ?></p>
+                        <p class="text-username">ร้าน <?php echo $_SESSION['username']; ?></p>
                     </li>
                     <li class="nav-item">
                         <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>
@@ -113,7 +114,7 @@ if (isset($_POST['update'])) {
                 <?php
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $sql = "SELECT * FROM food WHERE ID = $id";
+                    $sql = "SELECT * FROM food WHERE food_ID = $id";
                     $stmt = $conn->query($sql);
                     $stmt->execute();
                     $data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -122,7 +123,7 @@ if (isset($_POST['update'])) {
                 ?>
                 <div class="mb-3">
                     <label for="ID" class="col-form-label">ลำดับ:</label>
-                    <input type="text" readonly value="<?php echo $rs['ID']; ?>" required class="form-control" name="ID">
+                    <input type="text" readonly value="<?php echo $rs['food_ID']; ?>" required class="form-control" name="ID">
                     <label for="foodname" class="col-form-label"> ชื่อเมนู:</label>
                     <input type="text" value="<?php echo $rs['foodname']; ?>" required class="form-control" name="foodname">
                     <input type="hidden" value="<?php echo $rs['img']; ?>" required class="form-control" name="img2">
