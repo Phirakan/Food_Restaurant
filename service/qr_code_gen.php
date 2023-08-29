@@ -17,8 +17,12 @@ use Endroid\QrCode\Writer\PngWriter;
 
 $writer = new PngWriter();
 
+// get url for localhost
+$url = $_SERVER['HTTP_HOST'];
+$urlcombine = $url . "/order-menu.php?restaurant=" . $_SESSION['store_id'];
+
 // Create QR code
-$qrCode = QrCode::create('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+$qrCode = QrCode::create($urlcombine)
     ->setEncoding(new Encoding('UTF-8'))
     ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
     ->setSize(300)

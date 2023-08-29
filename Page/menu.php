@@ -6,7 +6,7 @@ require_once '../config/conn_db.php'; // Added semicolon at the end
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 if (!isset($_SESSION['username'])) {
     header("Location: ../index.php");
-}else{
+} else {
     $username = $_SESSION['username'];
     $storeid = $_SESSION['store_id'];
 }
@@ -33,6 +33,7 @@ if (isset($_GET['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/logo.png" type="image/x-icon" />
     <title>รายการอาหาร</title>
 
     <!-- Bootstrap -->
@@ -61,7 +62,9 @@ if (isset($_GET['delete'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav menunavbar">
                     <li class="nav-item username-layout">
-                    <p class="text-username">ร้าน <?php echo htmlspecialchars($username); ?></p>
+                        <p class="text-username">ร้าน
+                            <?php echo htmlspecialchars($username); ?>
+                        </p>
                     </li>
                     <li class="nav-item">
                         <a href="../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
@@ -76,6 +79,7 @@ if (isset($_GET['delete'])) {
 
 
     <div class="container-fluid menu-box">
+        <!-- Modal Add Food-->
         <div class="modal fade" id="foodmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -84,22 +88,22 @@ if (isset($_GET['delete'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-        <div class="modal-body">
-            <form action="../service/insert.php" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="foodname" class="col-form-label"> Name:</label>
-                    <input type="text" required class="form-control" name="foodname">
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="col-form-label">Price:</label>
-                    <input type="text" required class="form-control" name="price">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="img" class="col-form-label">Image:</label>
-                    <input type="file" required class="form-control" id="imgInput" name="img">
-                    <img loading="lazy" width="100%" id="previewImg" alt="">
-                </div>
+                    <div class="modal-body">
+                        <form action="../service/insert.php" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="foodname" class="col-form-label"> Name:</label>
+                                <input type="text" required class="form-control" name="foodname">
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="col-form-label">Price:</label>
+                                <input type="text" required class="form-control" name="price">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="img" class="col-form-label">Image:</label>
+                                <input type="file" required class="form-control" id="imgInput" name="img">
+                                <img loading="lazy" width="100%" id="previewImg" alt="">
+                            </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
@@ -111,14 +115,41 @@ if (isset($_GET['delete'])) {
                 </div>
             </div>
         </div>
+        <!-- End Modal Add Food  -->
+
+        <!-- Modal show QRCODE if no image to show button generate qrcode and if have image to show qrcode image and show button generate qrcode again -->
+        <!-- Modal -->
+        <div class="modal fade" id="qrcodemodal" tabindex="-1" aria-labelledby="qrcodemodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="qrcodemodalLabel">QRCODE</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <!-- text show "คุณยังไม่มี QRCODE -->
+                        <p id="no-qrcode-text">คุณยังไม่มี QRCODE</p>
+                        <!-- QR Code image will be displayed here -->
+                        <img src="" id="qrcode-image" class="img-fluid" alt="QR Code" style="display: none;">
+                        <!-- Button to generate QR Code -->
+                        <button class="btn btn-qrcode-gen" id="generate-qrcode-btn">สร้าง QRCODE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>รายการอาหาร <?php echo $_SESSION['username'] ?></h1>
+                    <h4>รายการอาหาร
+                        <?php echo $_SESSION['username'] ?>
+                    </h4>
                 </div>
-                <div class="col-md-6 d-flex justify-content-end">
+                <div class="col-md-6 d-flex justify-content-end" style="gap: 8px;">
+                    <button type="button" class="btn btn-add-menu" data-bs-toggle="modal" data-bs-target="#qrcodemodal"><i class="bi bi-qr-code-scan"></i>แสดง QRCODE</button>
+                    <button type="button" class="btn btn-add-menu" data-bs-toggle="modal" data-bs-target="#qrcodemodal"><i class="bi bi-plus-circle-fill"></i>เพิ่มโต๊ะอาหาร</button>
                     <button type="button" class="btn btn-add-menu" data-bs-toggle="modal" data-bs-target="#foodmodal"><i class="bi bi-plus-circle-fill"></i>เพิ่มรายการอาหาร</button>
                 </div>
             </div>
@@ -184,19 +215,20 @@ if (isset($_GET['delete'])) {
                     </table>
                     </div>
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-                <script>
-                    let imgInput = document.getElementById('imgInput');
-                    let previewImg = document.getElementById('previewImg');
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+        <script>
+            let imgInput = document.getElementById('imgInput');
+            let previewImg = document.getElementById('previewImg');
 
-                    imgInput.onchange = evt => {
-                        const [file] = imgInput.files;
-                        if (file) {
-                            previewImg.src = URL.createObjectURL(file)
-                        }
-                    }
-                </script>
+            imgInput.onchange = evt => {
+                const [file] = imgInput.files;
+                if (file) {
+                    previewImg.src = URL.createObjectURL(file)
+                }
+            }
+        </script>
 </body>
 
 </html>
