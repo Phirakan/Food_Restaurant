@@ -168,8 +168,7 @@ if (isset($_GET['delete'])) {
                 <div class="col-md-6 d-flex justify-content-end" style="gap: 8px;">
                     <button type="button" class="btn btn-add-menu" data-bs-toggle="modal"
                         data-bs-target="#qrcodemodal"><i class="bi bi-qr-code-scan"></i>แสดง QRCODE</button>
-                    <button type="button" class="btn btn-add-menu" data-bs-toggle="modal"
-                        data-bs-target="#qrcodemodal"><i class="bi bi-plus-circle-fill"></i>เพิ่มโต๊ะอาหาร</button>
+                    <button type="button" class="btn btn-add-menu" onclick="addtable()"><i class="bi bi-plus-circle-fill"></i>เพิ่มโต๊ะอาหาร</button>
                     <button type="button" class="btn btn-add-menu" data-bs-toggle="modal" data-bs-target="#foodmodal"><i
                             class="bi bi-plus-circle-fill"></i>เพิ่มรายการอาหาร</button>
                 </div>
@@ -260,6 +259,11 @@ if (isset($_GET['delete'])) {
             function generateQRCode() {
                 // redirect to page
                 window.location.href = "../service/qr_code_gen.php";
+            }
+
+            function addtable() {
+                // redirect to page
+                window.location.href = "table/table.php";
             }
         </script>
 </body>
