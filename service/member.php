@@ -60,7 +60,7 @@ if (isset($_POST['login'])) {
                 }
             } else {
                 $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
-                header("Location: .../Page/authentication/login.php");
+                header("Location: ../Page/authentication/login.php");
             }
 
         } catch(PDOException $e) {
