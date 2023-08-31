@@ -33,11 +33,14 @@ if (isset($_GET['foodname']) && isset($_GET['price']) && isset($_GET['quantity']
     <title>ตะกร้ารายการสั่งอาหาร</title>
 
     <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.5/dist/sweetalert2.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <!-- CSS -->
     <link rel="stylesheet" href="../../css/index.css" />
     <link rel="stylesheet" href="../../css/cart.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    
+
 </head>
 
 <body>
@@ -138,7 +141,7 @@ if (isset($_GET['foodname']) && isset($_GET['price']) && isset($_GET['quantity']
             <p class="text-total-price">ราคารวมทั้งหมด: <?php echo $totalPrice; ?></p>
             <div class="row" style="gap:16px;">
                 <a href="../order-menu.php" class="btn btn-back-to-ordermenu">กลับไปยังหน้าเมนู</a>
-                <a href="complete-order.php" class="btn btn-send-ordermenu">สั่งอาหาร</a>
+                <a  class="btn btn-send-ordermenu" id="orderButton" >สั่งอาหาร</a>
             </div>
         </div>
 
@@ -175,11 +178,17 @@ if (isset($_GET['foodname']) && isset($_GET['price']) && isset($_GET['quantity']
             xhr.send();
         }
     </script>
+    <script>
+document.getElementById("orderButton").addEventListener("click", function() {
+    alert("คำสั่งซื้อสำเร็จ!");
+    
+});
+</script>
+    
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script>
-        // Your JavaScript code here
-    </script>
+   
 </body>
 
 </html>

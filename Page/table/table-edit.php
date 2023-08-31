@@ -118,7 +118,7 @@ if (isset($_POST['update'])) {
             <form action="table-edit.php" method="post">
                 <div class="mb-3">
                     <label for="newTableNumber" class="form-label">เลขโต๊ะ:</label>
-                    <input type="number" class="form-control" name="newTableNumber" value="<?php echo $table['table_number']; ?>" required>
+                    <input type="text" class="form-control" name="newTableNumber" value="<?php echo $table['table_number']; ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="newTableName" class="form-label">ชื่อโต๊ะ:</label>
