@@ -8,18 +8,15 @@ if (!isset($_SESSION['username'])) {
 }
 
 if (isset($_GET['id'])) {
-    $table_id = $_GET['id'];
+    $_SESSION['table_id'] = $_GET['id'];
     // Get table information from the database
     $getTableSql = "SELECT * FROM tables WHERE table_ID = :table_id AND member_ID = :member_id";
     $stmt = $conn->prepare($getTableSql);
-    $stmt->bindParam(":table_id", $table_id);
+    $stmt->bindParam(":table_id", $_SESSION['table_id']);
     $stmt->bindParam(":member_id", $_SESSION['store_id']);
     $stmt->execute();
     $table = $stmt->fetch(PDO::FETCH_ASSOC);
-    // print table information
-    echo "<pre>";
-    print_r($table);
-    echo "</pre>";
+
     if(empty($table)) {
         $_SESSION['error'] = "Table information is not found";
         header("Location: table.php");
@@ -33,30 +30,7 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-if (isset($_POST['update'])) {
-    $tableNumber = $_POST['newTableNumber'];
-    $tableName = $_POST['newTableName'];
 
-    // Update table information in the database
-    $updateTableSql = "UPDATE tables SET table_number = :table_number, table_name = :table_name,member_ID = :member_ID WHERE table_ID = :table_id";
-    $stmt = $conn->prepare($updateTableSql);
-    $stmt->bindParam(":table_number", $tableNumber);
-    $stmt->bindParam(":table_name", $tableName);
-    $stmt->bindParam(":member_ID", $_SESSION['store_id']);
-    $stmt->bindParam(":table_id", $table_id);
-    // print binding parameters
-    echo "<pre>";
-    print_r($stmt);
-    echo "</pre>";
-
-    // if ($stmt->execute()) {
-    //     $_SESSION['success'] = "Table information has been updated successfully";
-    //     header("Location: table.php");
-    //     exit();
-    // } else {
-    //     $_SESSION['error'] = "Failed to update table information";
-    // }
-}
 ?>
 
 <!DOCTYPE html>
@@ -115,19 +89,19 @@ if (isset($_POST['update'])) {
                 ?>
             </div>
         <?php } ?>
-            <form action="table-edit.php" method="post">
+            <form action="../../service/tableService/tableEditService.php" method="POST">
                 <div class="mb-3">
-                    <label for="newTableNumber" class="form-label">เลขโต๊ะ:</label>
-                    <input type="text" class="form-control" name="newTableNumber" value="<?php echo $table['table_number']; ?>" required>
+                    <label for="tableNumber" class="form-label">เลขโต๊ะ:</label>
+                    <input type="text" class="form-control" name="tableNumber" value="<?php echo $table['table_number']; ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="newTableName" class="form-label">ชื่อโต๊ะ:</label>
-                    <input type="text" class="form-control" name="newTableName" value="<?php echo $table['table_name']; ?>" required>
+                    <label for="tableName" class="form-label">ชื่อโต๊ะ:</label>
+                    <input type="text" class="form-control" name="tableName" value="<?php echo $table['table_name']; ?>" required>
                 </div>
 
                 <div class="btn-edit-layout">
                     <a href="table.php" class="btn btn-back">ย้อนกลับ</a>
-                    <button type="submit" name="update" class="btn btn-save">บันทึก</button>
+                    <button type="submit" name="Update" class="btn btn-save">บันทึก</button>
                 </div>
             </form>
         </div>
