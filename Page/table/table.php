@@ -86,7 +86,7 @@ if (isset($_GET['delete'])) {
                     </div>
 
                     <div class="modal-body">
-                        <form action="../../service/table-insert.php" method="post" enctype="multipart/form-data">
+                        <form action="../../service/tableService/tableInsertService.php" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="tablenumber" class="col-form-label">เลขโต๊ะ:</label>
                                 <input type="text" required class="form-control" name="tablenumber">

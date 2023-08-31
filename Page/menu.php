@@ -100,11 +100,11 @@ if (isset($_GET['delete'])) {
                     <div class="modal-body">
                         <form action="../service/insert.php" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="foodname" class="col-form-label"> Name:</label>
+                                <label for="foodname" class="col-form-label">ชื่ออาหาร:</label>
                                 <input type="text" required class="form-control" name="foodname">
                             </div>
                             <div class="mb-3">
-                                <label for="price" class="col-form-label">Price:</label>
+                                <label for="price" class="col-form-label">ราคา:</label>
                                 <input type="text" required class="form-control" name="price">
                             </div>
 
@@ -258,7 +258,7 @@ if (isset($_GET['delete'])) {
 
             function generateQRCode() {
                 // redirect to page
-                window.location.href = "../service/qr_code_gen.php";
+                window.location.href = "../service/qrcodeService/qr_code_gen.php";
             }
 
             function addtable() {

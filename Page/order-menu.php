@@ -6,7 +6,7 @@ require_once '../config/conn_db.php'; // Added semicolon
 // url : localhost:3000/page/order-menu.php?restaurant=1
 if (isset($_GET['restaurant'])) {
     $restaurant_id = $_GET['restaurant'];
-    $_SESSION['restaurant_id_customer'] = $restaurant_id;
+    $_SESSION['store_id_customer'] = $restaurant_id;
     $sql = "SELECT * FROM `food` WHERE `member_id` = $restaurant_id";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -32,6 +32,7 @@ if (isset($_GET['restaurant'])) {
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/order-menu.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -115,14 +116,25 @@ if (isset($_GET['restaurant'])) {
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                alert('Item added to cart!');
-                location.reload(); // Optional: Reload the page or show a confirmation message
+                // Sweet alert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'เพิ่มรายการสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 1500
+
+                });
+                // location.reload(); // Optional: Reload the page or show a confirmation message
+                // reload after press ok button in sweet alert
+                setTimeout(function() {
+                    location.reload();
+                }, 1800);
             }
         };
         xhr.send();
     }
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 </body>
