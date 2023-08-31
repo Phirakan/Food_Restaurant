@@ -1,37 +1,29 @@
-<?php 
+<?php
+session_start();
+require_once '../config/conn_db.php';
 
-    session_start();
-    require_once '../config/conn_db.php'; // Added semicolon at the end
+if (!isset($_SESSION['username'])) {
+    header("Location: ../index.php");
+}
 
-    if (isset($_POST['submit'])) {
-        $table_number = $_POST['table_number'];
-        $img = $_FILES['img'];
 
-        $allow = array('jpg', 'jpeg', 'png');
-        $extension = explode(".", $img['name']);
-        $fileActExt = strtolower(end($extension));
-        $fileNew = rand() . "." . $fileActExt;
-        $filePath = "../upload/" . $fileNew;
+if (isset($_POST['submit'])) {
+    $tablenumber = $_POST['tablenumber'];
+    $tablename = $_POST['tablename'];
 
-        if  (in_array($fileActExt, $allow)){
-            if ($img['size'] > 0 && $img['error'] == 0){
-                if (move_uploaded_file($img['tmp_name'], $filePath)){
-                   $sql = $conn->prepare("INSERT INTO tables (table_number,  img) VALUES (:table_number,  :img)");
-                   $sql->bindParam(":table_number", $table_number);
-                   $sql->bindParam(":img", $fileNew);
-                   $sql->execute();
+    // Insert data into tables table
+    $insertsql = "INSERT INTO tables (table_number, table_name, member_ID) VALUES (:table_number, :table_name, :member_ID)";
+    $stmt = $conn->prepare($insertsql);
+    $stmt->bindParam(":table_number", $tablenumber);
+    $stmt->bindParam(":table_name", $tablename);
+    $stmt->bindParam(":member_ID", $_SESSION['store_id']);
 
-                   if ($sql) {
-                    $_SEESION['success'] = "Add menu successfully";
-                    header("location: ../Page/qrcode_gen.php");
-                   }else{
-                    $_SEESION['error'] = "Something went wrong";
-                    header("location: ../Page/qrcode_gen.php");
-                   }
-                } 
-                
-            }
-        }
+    if ($stmt->execute()) {
+        $_SESSION['success'] = "Table has been added successfully";
+        header("Location: ../Page/table/table.php");
+    } else {
+        $_SESSION['error'] = "Failed to add table";
+        header("Location: ../Page/table/table.php");
     }
-
+}
 ?>
