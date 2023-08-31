@@ -28,7 +28,7 @@ $writer = new PngWriter();
 
 // get url for localhost
 $url = $_SERVER['HTTP_HOST'];
-$urlcombine = $url . "/order-menu.php?restaurant=" . $_SESSION['store_id'];
+$urlcombine = $url . "/page/order-menu.php?restaurant=" . $_SESSION['store_id'];
 
 // Create QR code
 $qrCode = QrCode::create($urlcombine)
