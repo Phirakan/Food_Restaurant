@@ -1,12 +1,12 @@
 <?php
 
 session_start();
-require_once '../../config/conn_db.php'; 
+require_once '../../config/conn_db.php';
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 if (!isset($_SESSION['username'])) {
     header("Location: ../../index.php");
-}else{
+} else {
     $username = $_SESSION['username'];
     $storeid = $_SESSION['store_id'];
 }
@@ -62,7 +62,7 @@ if (isset($_GET['delete'])) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav menunavbar">
                     <li class="nav-item username-layout">
-                    <p class="text-username">ร้าน <?php echo htmlspecialchars($username); ?></p>
+                        <p class="text-username">ร้าน <?php echo htmlspecialchars($username); ?></p>
                     </li>
                     <li class="nav-item">
                         <a href="../../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
@@ -85,16 +85,16 @@ if (isset($_GET['delete'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-        <div class="modal-body">
-            <form action="../../service/table-insert.php" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="tablenumber" class="col-form-label">เลขโต๊ะ:</label>
-                    <input type="text" required class="form-control" name="tablenumber">
-                </div>
-                <div class="mb-3">
-                    <label for="tablename" class="col-form-label">ชื่อโต๊ะ:</label>
-                    <input type="text" required class="form-control" name="tablename">
-                </div>
+                    <div class="modal-body">
+                        <form action="../../service/table-insert.php" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="tablenumber" class="col-form-label">เลขโต๊ะ:</label>
+                                <input type="text" required class="form-control" name="tablenumber">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tablename" class="col-form-label">ชื่อโต๊ะ:</label>
+                                <input type="text" required class="form-control" name="tablename">
+                            </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
@@ -118,70 +118,70 @@ if (isset($_GET['delete'])) {
                 </div>
             </div>
             <hr>
-            <?php if (isset($_SEESION['success'])) { ?>
-                <div class="alert alert-success">
-                    <?php
-                    echo $_SEESION['success'];
-                    unset($_SEESION['success']);
+            <?php if (isset($_SESSION['tblUpdate_Success'])) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $_SESSION['tblUpdate_Success'];
+                    unset($_SESSION['tblUpdate_Success']);
                     ?>
-                <?php } ?>
-                <?php if (isset($_SEESION['error'])) { ?>
-                    <div class="alert alert-danger">
-                        <?php
-                        echo $_SEESION['error'];
-                        unset($_SEESION['error']);
-                        ?>
-                    <?php } ?>
-
-                    <!-- ตาราง -->
-                    <table class="table">
-                        <thead class="table-header">
-                            <tr>
-                                <th scope="col">ลำดับโต๊ะ</th>
-                                <th scope="col">เลขโต๊ะ</th>
-                                <th scope="col">ชื่อโต๊ะ</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // select data from database with store id(member_id) and sort by table_number 0>9
-                            $getTblsql = "SELECT * FROM tables WHERE member_ID = :member_id ORDER BY table_number ASC"; 
-                            $stmt = $conn->prepare($getTblsql);
-                            $stmt->bindParam(":member_id", $storeid);
-                            $stmt->execute();
-                            $resultTable = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                            if (!$resultTable) {
-                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
-                            } else {
-                                foreach ($resultTable as $tables) {
-                            ?>
-                                    <tr>
-                                        <td scope="row">
-                                            <?php echo $tables['table_ID']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $tables['table_number']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $tables['table_name']; ?>
-                                        </td>
-                                        
-                                        <td class="action-btn-layout column">
-                                            <a href="table-edit.php?id=<?php echo $tables['table_ID']; ?>" class="btn btn-edit">แก้ไข</a>
-                                            <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $tables['table_ID']; ?>" class="btn btn-delete">ลบ</a>
-                                        </td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-                    </table>
-                    </div>
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-               
+            <?php } ?>
+            <?php if (isset($_SESSION['tblUpdate_error'])) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <?php echo $_SESSION['tblUpdate_error'];
+                    unset($_SESSION['tblUpdate_error']);
+                    ?>
+                </div>
+            <?php } ?>
+
+            <!-- ตาราง -->
+            <table class="table">
+                <thead class="table-header">
+                    <tr>
+                        <th scope="col">ลำดับโต๊ะ</th>
+                        <th scope="col">เลขโต๊ะ</th>
+                        <th scope="col">ชื่อโต๊ะ</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // select data from database with store id(member_id) and sort by table_number 0>9
+                    $getTblsql = "SELECT * FROM tables WHERE member_ID = :member_id ORDER BY table_number ASC";
+                    $stmt = $conn->prepare($getTblsql);
+                    $stmt->bindParam(":member_id", $storeid);
+                    $stmt->execute();
+                    $resultTable = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    if (!$resultTable) {
+                        echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                    } else {
+                        foreach ($resultTable as $tables) {
+                    ?>
+                            <tr>
+                                <td scope="row">
+                                    <?php echo $tables['table_ID']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $tables['table_number']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $tables['table_name']; ?>
+                                </td>
+
+                                <td class="action-btn-layout column">
+                                    <a href="table-edit.php?id=<?php echo $tables['table_ID']; ?>" class="btn btn-edit">แก้ไข</a>
+                                    <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $tables['table_ID']; ?>" class="btn btn-delete">ลบ</a>
+                                </td>
+                            </tr>
+                    <?php }
+                    } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
