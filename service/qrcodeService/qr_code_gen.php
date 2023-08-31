@@ -4,8 +4,8 @@
  
 // include composer autoload
 session_start();
-require_once '../vendor/autoload.php';  // กำหนด path ให้ถูกต้อง
-require_once '../config/conn_db.php'; // กำหนด path ให้ถูกต้อง
+require_once '../../vendor/autoload.php';  // กำหนด path ให้ถูกต้อง
+require_once '../../config/conn_db.php'; // กำหนด path ให้ถูกต้อง
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -41,7 +41,7 @@ $qrCode = QrCode::create($urlcombine)
     ->setBackgroundColor(new Color(255, 255, 255));
 
 // Create generic logo
-$logo = Logo::create('../assets/logo.png')
+$logo = Logo::create('../../assets/logo.png')
     ->setResizeToWidth(50)
     ->setPunchoutBackground(true)
 ;
@@ -61,7 +61,7 @@ $filename = $_SESSION['username'].'.png';
 
 
 // Save it to a file
-$result->saveToFile('../upload/qrcode/'.$filename);
+$result->saveToFile('../../upload/qrcode/'.$filename);
 
 
 // Validate the result
@@ -75,7 +75,7 @@ if(empty($resultQR)){
     $stmt->bindParam(':id', $_SESSION['store_id']);
     $stmt->execute();
     // redirect to page
-    header("Location: ../../../page/menu.php");
+    header("Location: ../../../../page/menu.php");
 }else{
     // update data to database table
     $sql = "UPDATE `qrcode` SET `qrcode_img`=:filename WHERE member_ID = :id";
@@ -83,7 +83,7 @@ if(empty($resultQR)){
     $stmt->bindParam(':filename', $filename);
     $stmt->bindParam(':id', $_SESSION['store_id']);
     $stmt->execute();
-    header("Location: ../../../page/menu.php");
+    header("Location: ../../../../page/menu.php");
 
 }
 

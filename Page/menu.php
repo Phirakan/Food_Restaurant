@@ -258,7 +258,7 @@ if (isset($_GET['delete'])) {
 
             function generateQRCode() {
                 // redirect to page
-                window.location.href = "../service/qr_code_gen.php";
+                window.location.href = "../service/qrcodeService/qr_code_gen.php";
             }
 
             function addtable() {
