@@ -20,10 +20,10 @@ if (isset($_POST['submit'])) {
 
     if ($stmt->execute()) {
         $_SESSION['success'] = "Table has been added successfully";
-        header("Location: ../Page/table/table.php");
+        header("Location: ../page/table/table.php");
     } else {
         $_SESSION['error'] = "Failed to add table";
-        header("Location: ../Page/table/table.php");
+        header("Location: ../page/table/table.php");
     }
 }
 ?>

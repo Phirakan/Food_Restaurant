@@ -115,7 +115,7 @@
                         
                         <td width="250px"><img class="rounded" width="100%" src="../upload/<?php echo $tables['img']; ?>" alt=""></td>
                         <td>
-                            <a href="../Page/table-edit.php?table_id=<?php echo $tables['table_id']; ?>" class="btn btn-warning">Edit</a>
+                            <a href="../page/table-edit.php?table_id=<?php echo $tables['table_id']; ?>" class="btn btn-warning">Edit</a>
                             <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $tables['table_id']; ?>" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>

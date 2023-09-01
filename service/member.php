@@ -20,15 +20,15 @@ if (isset($_POST['login'])) {
     if (empty($username)) {
         $_SESSION['error'] = 'กรุณากรอกชื่อผู้ใช้งาน';
         echo "กรุณากรอกชื่อผู้ใช้งาน";
-        // header("Location: ../Page/authentication/login.php");
+        // header("Location: ../page/authentication/login.php");
     } else if (empty($password)) {
         $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
         echo "กรุณากรอกรหัสผ่าน";
-        // header("Location: ../Page/authentication/login.php");
+        // header("Location: ../page/authentication/login.php");
     } else if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
         $_SESSION['error'] = "กรุณากรอกรหัสผ่าน 8-20 ตัวอักษร";
         echo "กรุณากรอกรหัสผ่าน 8-20 ตัวอักษร";
-        // header("Location: ../Page/authentication/login.php");
+        // header("Location: ../page/authentication/login.php");
     } else {
         try {
 
@@ -52,15 +52,15 @@ if (isset($_POST['login'])) {
                     } else {
                         $_SESSION['error'] = 'รหัสผ่านผิด';
                         echo "รหัสผ่านผิด";
-                        header("Location: ../Page/authentication/login.php");
+                        header("Location: ../page/authentication/login.php");
                     }
                 } else {
                     $_SESSION['error'] = 'ไม่มีชื่อผู้ใช้งานนี้ในระบบ';
-                    header("Location: ../Page/authentication/login.php");
+                    header("Location: ../page/authentication/login.php");
                 }
             } else {
                 $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
-                header("Location: ../Page/authentication/login.php");
+                header("Location: ../page/authentication/login.php");
             }
 
         } catch(PDOException $e) {

@@ -101,7 +101,7 @@ if (isset($_SESSION['username'])) {
 
                 </div>
                 <div class="btn-edit-layout">
-                    <a href="../Page/menu.php" class="btn btn-back">ย้อนกลับ</a>
+                    <a href="../page/menu.php" class="btn btn-back">ย้อนกลับ</a>
                     <button type="submit" name="update" class="btn btn-save">บันทึก</button>
                 </div>
             </form>

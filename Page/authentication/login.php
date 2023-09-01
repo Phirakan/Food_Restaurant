@@ -4,7 +4,7 @@
 
   if (isset($user)) {  
     $_SESSION['username'] = $user['username'];
-    header('Location: ../Page/menu.php');  
+    header('Location: ../page/menu.php');  
     exit;
 }
 ?>
