@@ -5,7 +5,7 @@ require_once '../config/conn_db.php'; // Added semicolon at the end
 
 
 if (isset($_POST['update'])) {
-    $id = $_POST['ID'];
+    $id = $_POST['food_ID'];
     $foodname = $_POST['foodname'];
     $price = $_POST['price'];
 
@@ -30,12 +30,12 @@ if (isset($_POST['update'])) {
         $fileNew = $img2;
     }
 
-    $sql = $conn->prepare("UPDATE food SET foodname = :foodname, price = :price, quantity = :quantity, img = :img WHERE ID = :ID");
+    $sql = $conn->prepare("UPDATE food SET foodname = :foodname, price = :price, quantity = :quantity, img = :img WHERE food_ID = :food_ID");
     $sql->bindParam(":foodname", $foodname);
     $sql->bindParam(":price", $price);
     $sql->bindParam(":img", $fileNew);
     $sql->bindParam(":quantity", $quantity);
-    $sql->bindParam(":ID", $id);
+    $sql->bindParam(":food_ID", $id);
     $sql->execute();
 
     if ($sql) {

@@ -2,6 +2,7 @@
 session_start();
 require_once '../../config/conn_db.php';
 
+$selectedTableNumber = isset($_GET['table_Number']) ? $_GET['table_Number'] : '';
 
 if (isset($_POST['submitOrder'])) {
     // Get the total price and other data from the form
@@ -64,7 +65,7 @@ if (isset($_POST['submitOrder'])) {
                         </p>
                     </li>
                     <li class="nav-item">
-                        <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>
+                        <a href="../../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
                     </li>
 
                 </ul>
@@ -72,70 +73,65 @@ if (isset($_POST['submitOrder'])) {
         </div>
     </nav>
     <div class="container">
-        <!-- <h3>อาหารที่สั่งของวันที่ <?php echo date("d/m/Y  H:i"); ?></h3>
+        <h3>อาหารที่สั่งของวันที่ <?php echo date("d/m/Y "); ?></h3>
        
-        <p>โต๊ะ: <?php echo isset($_GET['tableNumber']) ? $_GET['tableNumber'] : 'ไม่ระบุ'; ?></p> -->
+       
 
         <h4>สรุปคำสั่งซื้อรายการอาหาร</h4>
         <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
             <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ชื่อเมนู</th>
-                        <th scope="col">ราคา</th>
-                        <th scope="col">จำนวน</th>
-                        <th scope="col">ราคารวม</th>
-                        <th scope="col">โต๊ะ</th>
-                        <!-- <th scope="col"></th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $totalPrice = 0;
-                    $totalQuantity = 0; // Initialize total quantity
-                    foreach ($_SESSION['cart'] as $index => $item):
-                        $itemTotal = $item['quantity'] * $item['price'];
-                        $totalPrice += $itemTotal;
-                        $totalQuantity += $item['quantity']; // Add to total quantity
-                        ?>
-                        <tr>
-                            <!-- <th scope="row"><?php echo $index + 1; ?></th> -->
-                            <td>
-                                <?php echo $item['foodname']; ?>
-                            </td>
-                            <td>
-                                <?php echo $item['price']; ?>
-                            </td>
-                            <td>
-                                <?php echo $item['quantity']; ?>
-                            </td>
-                            <td>
-                                <?php echo $itemTotal; ?>
-                            </td>
-                            <td>
-                                <?php echo 1; ?>
-                            </td>
-                            <!-- <td>
-                <button class="btn btn-danger" onclick="removeItem('<?php echo $item['foodname']; ?>')">ลบ</button>
-            </td> -->
+    <thead>
+        <tr>
+            <th scope="col">ชื่อเมนู</th>
+            <th scope="col">ราคา</th>
+            <th scope="col">จำนวน</th>
+            <th scope="col">ราคารวม</th>
+            <th scope="col">โต๊ะ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $totalPrice = 0;
+        $totalQuantity = 0; // Initialize total quantity
+        foreach ($_SESSION['cart'] as $index => $item):
+            $itemTotal = $item['quantity'] * $item['price'];
+            $totalPrice += $itemTotal;
+            $totalQuantity += $item['quantity']; // Add to total quantity
+            ?>
+            <tr>
+                <!-- <th scope="row"><?php echo $index + 1; ?></th> -->
+                <td>
+                    <?php echo $item['foodname']; ?>
+                </td>
+                <td>
+                    <?php echo $item['price']; ?>
+                </td>
+                <td>
+                    <?php echo $item['quantity']; ?>
+                </td>
+                <td>
+                    <?php echo $itemTotal; ?>
+                </td>
+                <td>
+                    <?php echo $selectedTableNumber; // แสดงหมายเลขโต๊ะที่เลือก ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-
-            </table>
         <?php else: ?>
             <p>ไม่มีรายการอาหาร</p>
         <?php endif; ?>
         <!-- Display the total price -->
-        <div class="rol" style="margin-left: 10px; display:flex; gap: 8px;">
+        <!-- <div class="rol" style="margin-left: 10px; display:flex; gap: 8px;">
             <p class="text-total-price">ทั้งหมด:
                 <?php echo $totalQuantity; ?> รายการ
             </p>
             <p class="text-total-price">ยอดรวมทั้งหมด:
                 <?php echo $totalPrice; ?> บาท
             </p>
-        </div>
+        </div> -->
 
     </div>
     <!-- ... -->

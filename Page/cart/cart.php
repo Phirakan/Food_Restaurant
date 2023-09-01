@@ -168,13 +168,14 @@ $tblInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- Display the total price -->
         <div class="col" style="margin-left: 14px;">
             <p class="text-total-price">ราคารวมทั้งหมด:
-                <?php echo $totalPrice; ?>
+                <?php echo $totalPrice; ?> บาท
             </p>
+            
             <div class="row" style="gap:8px; display:flex; flex-wrap: nowrap;">
                 <a href="../order-menu.php?restaurant=<?php echo $_SESSION['store_id_customer'] ?>"
                     class="btn btn-back-to-ordermenu">กลับไปยังหน้าเมนู</a>
                 <form id="orderForm" method="post" action="../../service/ordermenuService/ordermenuInsertService.php">
-                    <button type="submit" class="btn btn-send-ordermenu" id="orderButton" name="orderButton"
+                    <button href="../Result/result.php?tableNumber=<?php echo urlencode($selectedTableNumber); ?>" type="submit" class="btn btn-send-ordermenu" id="orderButton" name="orderButton"
                         >สั่งอาหาร</button>
                 </form>
             </div>
