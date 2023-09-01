@@ -3,29 +3,32 @@ session_start();
 require_once '../../config/conn_db.php';
 
 
-if (isset($_POST['submitOrder'])) {
-    // Get the total price and other data from the form
-    $totalPrice = $_POST['totalPrice'];
-    // You can get other menu items, quantities, etc. using similar method
+if (isset($_SESSION['username'])) {
+    // get current date format Y-m-d
+    $currentDate = date("Y-m-d");
+    $sql = "SELECT ordermenu.order_name, ordermenu.quantity, ordermenu.price, tables.table_name, ordermenu.order_date 
+           FROM ordermenu 
+           INNER JOIN tables ON ordermenu.table_ID = tables.table_number 
+           WHERE ordermenu.member_ID = {$_SESSION['store_id']} AND ordermenu.order_date = '{$currentDate}'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $orderData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Store the data in session or pass it to Result.php using a query parameter
-    $_SESSION['orderData'] = array(
-        'totalPrice' => $totalPrice,
-        // Include other data here
-    );
-
-    // Redirect to Result.php
-    header("Location: Result.php");
-    exit;
+    setlocale(LC_TIME, 'th_TH.utf8'); // Set the locale to Thai
+    date_default_timezone_set('Asia/Bangkok'); // Set timezone to Asia/Bangkok
+    
+} else {
+    header('Location: ../authentication/login.php');
 }
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <!-- CSS -->
     <link rel="stylesheet" href="../../css/index.css" />
     <link rel="stylesheet" href="../../css/edit-menu.css" />
@@ -44,14 +47,12 @@ if (isset($_POST['submitOrder'])) {
     <nav class="navbar navbar-expand-md navbarcustom">
         <div class="container-fluid">
             <a class="navbar-brand" href="../../index.php">
-                <img src="../../assets/logo.png" alt="Logo" width="50" height="50"
-                    class="d-inline-block align-text-top" />
+                <img src="../../assets/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
                 <span class="textbrand">อร่อยใกล้เคียง</span>
             </a>
 
             <!-- Add the hamburger menu button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -64,7 +65,7 @@ if (isset($_POST['submitOrder'])) {
                         </p>
                     </li>
                     <li class="nav-item">
-                        <a href="page/order-menu.php" class="btn btn-order-atnav">ออกจากระบบ</a>
+                        <a href="../../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
                     </li>
 
                 </ul>
@@ -76,65 +77,55 @@ if (isset($_POST['submitOrder'])) {
        
         <p>โต๊ะ: <?php echo isset($_GET['tableNumber']) ? $_GET['tableNumber'] : 'ไม่ระบุ'; ?></p> -->
 
-        <h4>สรุปคำสั่งซื้อรายการอาหาร</h4>
-        <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
-            <table class="table">
-                <thead>
+        <h4>สรุปคำสั่งซื้อรายการอาหารประจำวันที่ <?php echo date("d/m/Y"); ?></h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ชื่อเมนู</th>
+                    <th scope="col">ราคา</th>
+                    <th scope="col">จำนวน</th>
+                    <th scope="col">ราคารวม</th>
+                    <th scope="col">โต๊ะ</th>
+                    <!-- <th scope="col"></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $totalPrice = 0;
+                $totalQuantity = 0;
+                foreach ($orderData as $order) {
+                    $totalPrice += $order['price'] * $order['quantity'];
+                    $totalQuantity += $order['quantity'];
+                ?>
                     <tr>
-                        <th scope="col">ชื่อเมนู</th>
-                        <th scope="col">ราคา</th>
-                        <th scope="col">จำนวน</th>
-                        <th scope="col">ราคารวม</th>
-                        <th scope="col">โต๊ะ</th>
-                        <!-- <th scope="col"></th> -->
+                        <td><?php echo $order['order_name']; ?></td>
+                        <td><?php echo $order['price']; ?></td>
+                        <td><?php echo $order['quantity']; ?></td>
+                        <td><?php echo $order['price'] * $order['quantity']; ?></td>
+                        <td><?php echo $order['table_name']; ?></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $totalPrice = 0;
-                    $totalQuantity = 0; // Initialize total quantity
-                    foreach ($_SESSION['cart'] as $index => $item):
-                        $itemTotal = $item['quantity'] * $item['price'];
-                        $totalPrice += $itemTotal;
-                        $totalQuantity += $item['quantity']; // Add to total quantity
-                        ?>
-                        <tr>
-                            <!-- <th scope="row"><?php echo $index + 1; ?></th> -->
-                            <td>
-                                <?php echo $item['foodname']; ?>
-                            </td>
-                            <td>
-                                <?php echo $item['price']; ?>
-                            </td>
-                            <td>
-                                <?php echo $item['quantity']; ?>
-                            </td>
-                            <td>
-                                <?php echo $itemTotal; ?>
-                            </td>
-                            <td>
-                                <?php echo 1; ?>
-                            </td>
-                            <!-- <td>
-                <button class="btn btn-danger" onclick="removeItem('<?php echo $item['foodname']; ?>')">ลบ</button>
-            </td> -->
+                <?php
+                }
+                ?>
 
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
 
-            </table>
-        <?php else: ?>
-            <p>ไม่มีรายการอาหาร</p>
-        <?php endif; ?>
-        <!-- Display the total price -->
-        <div class="rol" style="margin-left: 10px; display:flex; gap: 8px;">
-            <p class="text-total-price">ทั้งหมด:
-                <?php echo $totalQuantity; ?> รายการ
-            </p>
-            <p class="text-total-price">ยอดรวมทั้งหมด:
-                <?php echo $totalPrice; ?> บาท
-            </p>
+            </tbody>
+
+        </table>
+
+        <div class="col">
+            <div class="rol" style="margin-left: 10px; display:flex; gap: 8px;">
+                <p class="text-total-price">ทั้งหมด:
+                    <?php echo $totalQuantity; ?> รายการ
+                </p>
+                <p class="text-total-price">ยอดรวมทั้งหมด:
+                    <?php echo $totalPrice; ?> บาท
+                </p>
+            </div>
+            <div class="rol" style="margin-left: 10px; display:flex; gap: 8px;">
+                <a href="../order-menu.php?restaurant=<?php echo $_SESSION['store_id_customer'] ?>" class="btn btn-back-to-menu">กลับไปยังหน้าเมนู</a>
+            </div>
         </div>
 
     </div>
@@ -147,7 +138,7 @@ if (isset($_POST['submitOrder'])) {
 
                 xhr.open('GET', `../../service/remove_item.php?foodname=${encodeURIComponent(foodname)}`, true);
 
-                xhr.onreadystatechange = function () {
+                xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                         location.reload(); // Reload the page to reflect the updated cart
                     }

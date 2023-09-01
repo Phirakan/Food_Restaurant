@@ -3,9 +3,8 @@
 session_start();
 require_once '../config/conn_db.php'; // Added semicolon at the end 
 
-if(isset($_SESSION['username'])){
-    
-}else{
+if (isset($_SESSION['username'])) {
+} else {
     header("location: authentication/login.php");
 }
 

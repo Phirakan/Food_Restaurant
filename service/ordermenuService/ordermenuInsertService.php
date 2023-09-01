@@ -9,12 +9,21 @@ if (isset($_POST['orderButton'])) {
             // my table ordermenu
             // order_ID (AUTO_INCREMENT) ,order_date (NOW(date only no time)), order_name (foodname), quantity, finish_order (currently not use), table_ID (FK), member_ID (FK) 
             // because order more one item and before page to save in session array so we need to loop to insert each item in session array to database
-            $sql = "INSERT INTO ordermenu (order_date, order_name, quantity, table_ID, member_ID) VALUES (NOW(), :order_name, :quantity, :table_ID, :member_ID)";
+            $sql = "INSERT INTO ordermenu (order_date, order_name, quantity,price, table_ID, member_ID) VALUES (NOW(), :order_name, :quantity,:price, :table_ID, :member_ID)";
 
+            // echo "<pre>";
+            // print_r($_SESSION['cart']);
+            // echo "</pre>";
+            // echo "<br>";
+            // echo $_SESSION['tableSelectOrder'];
+            // echo "<br>";
+            // echo $_SESSION['store_id_customer'];
+            // echo "<br>";
             foreach ($_SESSION['cart'] as $item) {
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(":order_name", $item['foodname']);
                 $stmt->bindParam(":quantity", $item['quantity']);
+                $stmt->bindParam(":price",  $item['price']);
                 $stmt->bindParam(":table_ID", $_SESSION['tableSelectOrder']);
                 $stmt->bindParam(":member_ID", $_SESSION['store_id_customer']);
                 $stmt->execute();
