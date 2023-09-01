@@ -27,10 +27,10 @@
 
                    if ($sql) {
                     $_SEESION['success'] = "Add menu successfully";
-                    header("location: ../Page/menu.php");
+                    header("location: ../page/menu.php");
                    }else{
                     $_SEESION['error'] = "Something went wrong";
-                    header("location: ../Page/menu.php");
+                    header("location: ../page/menu.php");
                    }
                 } 
                 

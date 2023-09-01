@@ -223,7 +223,7 @@ if (isset($_GET['delete'])) {
 
                                         <td width="250px"><img class="rounded" width="100%" src="../upload/<?php echo $food['img']; ?>" alt=""></td>
                                         <td class="action-btn-layout column">
-                                            <a href="../Page/edit_menu.php?id=<?php echo $food['food_ID']; ?>" class="btn btn-edit">แก้ไข</a>
+                                            <a href="../page/edit_menu.php?id=<?php echo $food['food_ID']; ?>" class="btn btn-edit">แก้ไข</a>
                                             <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $food['food_ID']; ?>" class="btn btn-delete">ลบ</a>
                                         </td>
                                     </tr>

@@ -3,7 +3,7 @@
   require_once('config/conn_db.php');
 
   if (!isset($_SESSION['username'])) {
-    header('Location: Page/authentication/login.php');  // ถ้ายังไม่ได้ Login, นำไปยังหน้า Login
+    header('Location: page/authentication/login.php');  // ถ้ายังไม่ได้ Login, นำไปยังหน้า Login
     exit;}
 ?>
 
@@ -50,7 +50,7 @@
                 <p class="text-username">ร้าน <?php echo $_SESSION['username'] ?></p>
                     </li>
                 <li class="nav-item">
-                  <a href="../Page/menu.php" class="btn btn-order-atnav">ร้านค้า</a>
+                  <a href="page/menu.php" class="btn btn-order-atnav">ร้านค้า</a>
                 </li>
                 <li class="nav-item">
                     <a href="service/logout.php" class="btn btn-store-atnav">ออกจากระบบ</a>
@@ -58,7 +58,7 @@
                
             <?php } else { ?>
               <li class="nav-item">
-                <a href="Page/authentication/login.php" class="btn btn-order-atnav">เข้าสู่ระบบ</a>
+                <a href="page/authentication/login.php" class="btn btn-order-atnav">เข้าสู่ระบบ</a>
               </li>
             <?php } ?>
             </ul>
@@ -76,7 +76,7 @@
             <p class="text-description">แพลตฟอร์มสั่งอาหารออนไลน์ ที่จะช่วยให้คุณสามารถสั่งอาหารจากร้านค้าใกล้เคียง และรับประทานอาหารได้ที่บ้าน หรือที่ไหนก็ได้ อย่างง่ายดาย</p>
            <!-- if else -->
            <?php if (isset($_SESSION['username'])) { ?>
-            <a href="Page/order-menu.php?restaurant=<?php echo $_SESSION['store_id'] ?>" class="btn btn-order">สั่งอาหาร</a>
+            <a href="page/order-menu.php?restaurant=<?php echo $_SESSION['store_id'] ?>" class="btn btn-order">สั่งอาหาร</a>
             <?php } else { ?>
               <a href="#" class="btn btn-order">กรุณาสแกน QRCODE จากร้านอาหาร</a>
             <?php } ?>
