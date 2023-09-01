@@ -12,6 +12,8 @@ try {
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   // set the character set to utf8mb4
   $conn->exec("SET NAMES utf8mb4");
+  // set timezone
+  $conn->exec("SET time_zone = '+07:00'");
   // echo "Connected successfully";
 } catch(PDOException $e) {
   // echo "Connection failed: " . $e->getMessage();
