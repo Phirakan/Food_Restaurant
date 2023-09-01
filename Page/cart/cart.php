@@ -13,8 +13,8 @@ if (isset($_GET['foodname']) && isset($_GET['price']) && isset($_GET['quantity']
     // You can use an array or other data structure to store multiple items in the cart
     $_SESSION['cart'][] = array(
         'foodname' => $foodname,
+        'quantity' => $quantity,
         'price' => $price,
-        'quantity' => $quantity
     );
 }
 
@@ -74,7 +74,7 @@ $tblInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </p>
                     </li>
                     <li class="nav-item">
-                        <a href="../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
+                        <a href="../../service/logout.php" class="btn btn-order-atnav">ออกจากระบบ</a>
                     </li>
 
                 </ul>

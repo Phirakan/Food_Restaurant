@@ -4,6 +4,7 @@ session_start();
 require_once '../config/conn_db.php'; // Added semicolon  
 // get value from url
 // url : localhost:3000/page/order-menu.php?restaurant=1
+unset($_SESSION['tableSelectOrder']);
 if (isset($_GET['restaurant'])) {
     $restaurant_id = $_GET['restaurant'];
     $_SESSION['store_id_customer'] = $restaurant_id;
